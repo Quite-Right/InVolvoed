@@ -98,8 +98,10 @@ export const GestureRecognition = () => {
                         }
                     })
                     if (gestureName === swipeRightHand) {
+                        console.log('rotateRight')
                         dispatch(rotateRight())
                     } else {
+                        console.log('rotateLeft')
                         dispatch(rotateLeft())
                     }
                 }
