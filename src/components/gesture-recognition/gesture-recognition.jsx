@@ -56,8 +56,6 @@ export const GestureRecognition = () => {
 
         // Make Detections
         const hand = await net.estimateHands(video);
-        console.log(hand);
-
 
         if (hand.length > 0) {
           const GE = new fp.GestureEstimator([raisedHandGesture, swipeLeftGesture, swipeRightGesture]);
