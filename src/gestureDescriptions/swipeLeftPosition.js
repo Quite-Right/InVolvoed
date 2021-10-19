@@ -5,7 +5,6 @@ export const swipeLeftGesture = new fp.GestureDescription(swipeLeftHand);
 
 // Thumb
 swipeLeftGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
-swipeLeftGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.HalfCurl, 1.0);
 swipeLeftGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalUp, 1.0);
 swipeLeftGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalUpLeft, 0.8);
 
@@ -19,10 +18,8 @@ swipeLeftGesture.addDirection(fp.Finger.Middle, fp.FingerDirection.DiagonalUpLef
 
 // Ring
 swipeLeftGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
-swipeLeftGesture.addCurl(fp.Finger.Ring, fp.FingerCurl.HalfCurl, 1.0);
 swipeLeftGesture.addDirection(fp.Finger.Ring, fp.FingerDirection.DiagonalUpLeft, 1);
 
 // Pinky
 swipeLeftGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
-swipeLeftGesture.addCurl(fp.Finger.Pinky, fp.FingerCurl.HalfCurl, 1.0);
 swipeLeftGesture.addDirection(fp.Finger.Pinky, fp.FingerDirection.DiagonalUpLeft, 1);
