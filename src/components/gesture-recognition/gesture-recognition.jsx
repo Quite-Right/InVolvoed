@@ -76,12 +76,15 @@ export const GestureRecognition = () => {
                 dispatch(rotationStop());
                 setSwipeGestureLast(null)
             } else if (gestureName === swipeLeftHand || gestureName === swipeRightHand) {
+                console.log('swipe')
                 if (!swipeGestureLast) {
+                    console.log('!swipeGestureLast');
                     setSwipeGestureLast({
                         gestureName,
                         timeout: setTimeout(() => {setSwipeGestureLast(null)}, gestureMoveDefineTimeout)
                     })
                 } else if (swipeGestureLast.gestureName === gestureName) {
+                    console.log('same')
                     setSwipeGestureLast(swipeGestureLast => {
                         clearTimeout(swipeGestureLast.timeout)
                         return {
@@ -90,6 +93,7 @@ export const GestureRecognition = () => {
                         }
                     })
                 } else {
+                    console.log('not same')
                     setSwipeGestureLast(swipeGestureLast => {
                         clearTimeout(swipeGestureLast.timeout)
                         return {
