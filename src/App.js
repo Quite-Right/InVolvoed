@@ -23,6 +23,8 @@ export default function App() {
                 hasMic = true;
             } else if (device.kind === 'videoinput') {
                 hasVideo = true;
+            }  else {
+                console.log(device.kind)
             }
         })
 
@@ -39,7 +41,7 @@ export default function App() {
             <Scene />
             <div className="button-group">
                 {hasMic && <VoiceRecognition />}
-                {/*{ hasVideo && <GestureRecognition />}*/}
+                { hasVideo && <GestureRecognition />}
             </div>
         </div>
         </ReduxProvider>

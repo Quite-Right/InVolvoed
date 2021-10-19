@@ -25,20 +25,13 @@ export const GestureRecognition = ({appRef}) => {
     const images = { thumbs_up: thumbs_up, victory: victory };
 
 
-    useEffect(async () => {
+    useEffect( () => {
+      const loadPoses = async () => {
         const net = await handpose.load();
         setLoadedPoses(net);
-        toggleVideoActive();
-        }, []);
-
-    const runHandpose = async () => {
-      const net = await handpose.load();
-      console.log("Handpose model loaded.");
-      //  Loop and detect hands
-      setInterval(() => {
-        detect(net);
-      }, 10);
-    };
+      }
+      loadPoses();
+    }, []);
 
     const detect = async (net) => {
       // Check data is available
@@ -49,8 +42,8 @@ export const GestureRecognition = ({appRef}) => {
       ) {
         // Get Video Properties
         const video = webcamRef.current.video;
-        const videoWidth = webcamRef.current.video.videoWidth;
-        const videoHeight = webcamRef.current.video.videoHeight;
+        const videoWidth = video.videoWidth;
+        const videoHeight = video.videoHeight;
 
         // Set video width
         webcamRef.current.video.width = videoWidth;
@@ -62,12 +55,12 @@ export const GestureRecognition = ({appRef}) => {
 
         // Make Detections
         const hand = await net.estimateHands(video);
-        // console.log(hand);
+        console.log(hand);
 
 
         if (hand.length > 0) {
           const GE = new fp.GestureEstimator([raisedHandGesture]);
-          const gesture = await GE.estimate(hand[0].landmarks, 4);
+          const gesture = await GE.estimate(hand[0].landmarks, 8);
           if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
             // console.log(gesture.gestures);
 
@@ -77,9 +70,9 @@ export const GestureRecognition = ({appRef}) => {
             const maxConfidence = confidence.indexOf(
               Math.max.apply(null, confidence)
             );
-            // console.log(gesture.gestures[maxConfidence].name);
+            console.log(gesture.gestures[maxConfidence].name);
             setPose(gesture.gestures[maxConfidence].name);
-            console.log(pose);
+            // console.log(pose);
           }
         }
 
@@ -93,17 +86,19 @@ export const GestureRecognition = ({appRef}) => {
     // useEffect(()=>{runHandpose()},[]);
 
     const toggleVideoActive = async () => {
+      if (loadedPoses) {
         if (videoActive) {
-            setVideoActive(false);
-            if (detectionInterval) {
-                clearInterval(detectionInterval);
-            };
+          setVideoActive(false);
+          if (detectionInterval) {
+              clearInterval(detectionInterval);
+          };
         } else {
-            setVideoActive(true);
-            setInterval(() => {
-                detect(loadedPoses);
-            }, 10);
+          setVideoActive(true);
+          setInterval(() => {
+              detect(loadedPoses);
+          }, 10);
         }
+      }
     }
 
     return  <>
