@@ -3,8 +3,9 @@ import {useAnimations, useGLTF} from '@react-three/drei'
 import {useLoader} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from 'three';
+import shadowImage from '../../images/BakedShadow.png'
 
-const MODEL_URL = './auto14.gltf';
+const MODEL_URL = './auto33.gltf';
 
 export default function Model(props) {
     const  group = useRef();
@@ -45,35 +46,71 @@ export default function Model(props) {
     //     toggleLeftFrontWindowWarning();
     // }, [])
 
+    // скрыть Mesh'ы, необходимые для смены материала
     useEffect(() => {
+        if (nodes) {
+            console.log(nodes);
+            const nodeNamesToHide = ['Sphere'];
+            nodeNamesToHide.forEach(nodeNameToHide => {
+                const nodeToHide = nodes[nodeNameToHide];
+                if (nodeToHide) {
+                    nodeToHide.visible = false;
+                }
+            })
+        }
+    }, [])
+
+    // применить материалы в зависимости от текущего материала
+    useEffect(() => {
+        for (const key in nodes) {
+            if (nodes[key].material?.name === 'MetallicBlue')
+            nodes[key].material = materials['MetallicRed']
+        }
+    }, [])
+
+    // создание анимаций
+    useEffect(() => {
+        console.log(clips)
         const newCarActions = {};
         clips.forEach((clip, index) => {
-            const clipClone = clip.clone();
-            const newAction = mixer.clipAction( clipClone, scene.children[0]);
-            newAction.clampWhenFinished = true;
-            newAction.setLoop(THREE.LoopPingPong);
-            newAction.repetitions = 0;
-            newCarActions[clip.name.replace('Open', 'Toggle')] = () => {
-                newAction.play();
-                newAction.paused = false ;
-                newAction.repetitions += 1 ;
-            };
+                const clipClone = clip.clone();
+                const object = scene.children.find(({name}) => name === clip.name.replace('Open', '').replace('Window', ''));
+                if (object) {
+                    const newAction = mixer.clipAction( clipClone, object);
+                    newAction.clampWhenFinished = true;
+                    newAction.setLoop(THREE.LoopPingPong);
+                    newAction.repetitions = 0;
+                    newCarActions[clip.name.replace('Open', 'Toggle')] = () => {
+                        newAction.play();
+                        newAction.paused = false ;
+                        newAction.repetitions += 1 ;
+                    };
+                }
+
+
         });
         console.log(newCarActions);
         setCarActions(newCarActions);
     }, [])
 
+    // тест работы действий - потом заменить на выполнение действий
     useEffect(() => {
         if (carActions) {
 
             setTimeout(() => {
-                carActions['FrontLeftDoorToggle']();
-                setTimeout(carActions['FrontLeftDoorToggle'], 2000)
+                // carActions['FrontLeftDoorToggle']();
+                // carActions['FrontLeftDoorWindowToggle']();
+                // carActions['BackLeftDoorWindowToggle']();
+                carActions['TrunkToggle']();
+                setTimeout(carActions['FrontRightDoorWindowToggle'], 2000)
+                setTimeout(carActions['BackRightDoorToggle'], 2000)
+                setTimeout(carActions['BackRightDoorWindowToggle'], 2000)
+                setTimeout(carActions['TrunkToggle'], 2000)
+
+
             }, 5000)
         }
     }, [carActions])
-
-    // useEffect(sc)
 
     return (
         <>

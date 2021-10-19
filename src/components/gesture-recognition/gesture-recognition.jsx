@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVideo, faVideoSlash} from '@fortawesome/free-solid-svg-icons'
 import cn from "classnames";
 import './styles.scss';
+import {useMediaDevices} from "react-use";
+import {raisedHandGesture} from "../../gestureDescriptions/raisedHand";
 
 export const GestureRecognition = ({appRef}) => {
     const [videoActive, setVideoActive] = useState(false);
@@ -21,6 +23,7 @@ export const GestureRecognition = ({appRef}) => {
 
     const [pose, setPose] = useState(null);
     const images = { thumbs_up: thumbs_up, victory: victory };
+
 
     useEffect(async () => {
         const net = await handpose.load();
@@ -63,10 +66,7 @@ export const GestureRecognition = ({appRef}) => {
 
 
         if (hand.length > 0) {
-          const GE = new fp.GestureEstimator([
-            fp.Gestures.VictoryGesture,
-            fp.Gestures.ThumbsUpGesture,
-          ]);
+          const GE = new fp.GestureEstimator([raisedHandGesture]);
           const gesture = await GE.estimate(hand[0].landmarks, 4);
           if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
             // console.log(gesture.gestures);

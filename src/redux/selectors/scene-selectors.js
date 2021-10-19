@@ -1,0 +1,1 @@
+export const rotationSelector = (store) => store.scene.rotation;

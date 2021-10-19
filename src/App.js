@@ -1,35 +1,48 @@
-// 0. Install fingerpose npm install fingerpose
-// 1. Add Use State
-// 2. Import emojis and finger pose import * as fp from "fingerpose";
-// 3. Setup hook and emoji object
-// 4. Update detect function for gesture handling
-// 5. Add emoji display to the screen
-// import React, { useRef, useState, useEffect } from "react";
-import React, {Suspense, useRef} from "react";
-import "./App.css";
-// import VolvoCar from "./components/volvo-car/volvo-car";
-// import {Loader} from "./components/loader/loader";
-// import { Canvas } from "@react-three/fiber";
-// import { useLoader } from "@react-three/fiber";
-// import { Environment, OrbitControls } from "@react-three/drei";
-// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-// import Model from './components/model/model';
-import VoiceRecognition from "./components/voice-recognition/voice-recognition";
+import React, {Suspense, useEffect, useRef, useState} from "react";
+import "./styles.scss";
+import { Provider as ReduxProvider } from "react-redux";
+import store from "./redux/store";
 import Scene from './components/scene/scene'
+import {VoiceRecognition} from "./components/voice-recognition/voice-recognition";
 import {GestureRecognition} from "./components/gesture-recognition/gesture-recognition";
+import {useMediaDevices} from "react-use";
 
 export default function App() {
-    const appRef = useRef(null);
+    const devices = useMediaDevices();
+    const [{hasMic, hasVideo}, setDevicesAvailablity] = useState({
+        hasMic: false,
+        hasVideo: false,
+    });
+
+    useEffect(() => {
+        console.log(devices.devices)
+        let hasMic = false;
+        let hasVideo = false;
+        devices?.devices?.forEach(device => {
+            if (device.kind === 'audioinput') {
+                hasMic = true;
+            } else if (device.kind === 'videoinput') {
+                hasVideo = true;
+            }
+        })
+
+        setDevicesAvailablity({
+            hasMic,
+            hasVideo,
+        })
+
+    }, [devices])
 
     return (
-        <div className="App" ref={appRef}>
+        <ReduxProvider store={store}>
+        <div className="App">
             <Scene />
-
             <div className="button-group">
-            {/*    <VoiceRecognition />*/}
-                <GestureRecognition appRef={appRef}/>
+                {hasMic && <VoiceRecognition />}
+                {/*{ hasVideo && <GestureRecognition />}*/}
             </div>
         </div>
+        </ReduxProvider>
     );
 }
 
