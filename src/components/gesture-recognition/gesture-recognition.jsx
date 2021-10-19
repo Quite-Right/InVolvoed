@@ -85,32 +85,32 @@ export const GestureRecognition = () => {
                     console.log('!swipeGestureLast');
                     setSwipeGestureLast({
                         gestureName,
-                        timeout: setTimeout(clearSwipeGestureLast, gestureMoveDefineTimeout)
+                        timestamp: Date.now(),
                     })
                 } else if (swipeGestureLast.gestureName === gestureName) {
                     console.log('same')
                     setSwipeGestureLast(swipeGestureLast => {
-                        clearTimeout(swipeGestureLast.timeout)
                         return {
                             gestureName,
-                            timeout: setTimeout(clearSwipeGestureLast, gestureMoveDefineTimeout)
+                            timestamp: Date.now(),
                         }
                     })
                 } else {
                     console.log('not same')
                     setSwipeGestureLast(swipeGestureLast => {
-                        clearTimeout(swipeGestureLast.timeout)
                         return {
                             gestureName,
-                            timeout: setTimeout(clearSwipeGestureLast, gestureMoveDefineTimeout)
+                            timestamp: Date.now(),
                         }
                     })
-                    if (gestureName === swipeRightHand) {
-                        console.log('rotateRight')
-                        dispatch(rotateRight())
-                    } else {
-                        console.log('rotateLeft')
-                        dispatch(rotateLeft())
+                    if (Date.now() - swipeGestureLast.timestamp <= gestureMoveDefineTimeout) {
+                        if (gestureName === swipeRightHand) {
+                            console.log('rotateRight')
+                            dispatch(rotateRight())
+                        } else {
+                            console.log('rotateLeft')
+                            dispatch(rotateLeft())
+                        }
                     }
                 }
             }
