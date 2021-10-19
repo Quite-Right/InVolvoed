@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./styles.scss";
 import { Provider as ReduxProvider } from "react-redux";
 import store from "./redux/store";
@@ -23,7 +23,7 @@ export default function App() {
                 hasMic = true;
             } else if (device.kind === 'videoinput') {
                 hasVideo = true;
-            }  else {
+            } else {
                 console.log(device.kind)
             }
         })
@@ -41,7 +41,7 @@ export default function App() {
             <Scene />
             <div className="button-group">
                 {hasMic && <VoiceRecognition />}
-                { hasVideo && <GestureRecognition />}
+                {hasVideo && <GestureRecognition />}
             </div>
         </div>
         </ReduxProvider>

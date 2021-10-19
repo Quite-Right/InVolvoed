@@ -1,8 +1,10 @@
-import {LOCK_CAR, UNLOCK_CAR, LOCK_CAR_START, LOCK_CAR_COMPLETE, LOCK_CAR_ERROR} from "../actions";
-import {ROTATION_SPEED} from "../../constants";
+import {LOCK_CAR, UNLOCK_CAR, LOCK_CAR_START, LOCK_CAR_COMPLETE, LOCK_CAR_ERROR, UNSET_LOCK_CAR_ERROR} from "../actions";
 
 const initialState = {
-    rotation: 0,
+    lockInProcess: false,
+    isLocked: true,
+    lockError: null,
+
 };
 
 const carReducer = (state = initialState, action) => {
@@ -10,17 +12,17 @@ const carReducer = (state = initialState, action) => {
         case LOCK_CAR_START:
             return {
                 ...state,
-                inProcess: true,
+                lockInProcess: true,
             }
         case LOCK_CAR_COMPLETE:
             return {
                 ...state,
-                inProcess: false,
+                lockInProcess: false,
             }
         case LOCK_CAR_ERROR:
             return  {
                 ...state,
-                error: action.payload,
+                lockError: action.payload,
             }
         case LOCK_CAR:
             return {
@@ -32,9 +34,11 @@ const carReducer = (state = initialState, action) => {
                 ...state,
                 isLocked: false,
             }
-
-
-
+        case UNSET_LOCK_CAR_ERROR:
+            return {
+                ...state,
+                lockError: null,
+            }
         default:
             return state;
     }

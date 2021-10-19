@@ -11,7 +11,7 @@ import {defineDayTimeAppeal} from "../../utils/defineDayTime";
 export const VoiceRecognition = () => {
     const [recognizer, setRecognizer] = useState(null);
     const [micActive, setMicActive] = useState(false);
-    const [synth, setSynth] = useState(window.speechSynthesis);
+    const synth = window.speechSynthesis;
 
     const toggleRecognition = () => {
         if (micActive && recognizer) {

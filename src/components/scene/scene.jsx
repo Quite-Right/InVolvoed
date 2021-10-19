@@ -1,19 +1,18 @@
-import React, {Suspense, useEffect, useReducer, useRef, useState} from "react";
+import React, {Suspense, useEffect} from "react";
 import {Loader} from "../loader/loader";
 import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls, CubeCamera, ContactShadows, Shadow, PerspectiveCamera } from "@react-three/drei";
+import { Environment, OrbitControls} from "@react-three/drei";
 import Model from '../model/model';
 import * as THREE from 'three';
 import {useDispatch, useSelector} from "react-redux";
 import {rotationSelector} from "../../redux/selectors";
-import {Arrow} from 'vcc-ui';
-import cn from 'classnames';
+// import {Arrow} from 'vcc-ui';
+// import cn from 'classnames';
+// import {rotateLeft, rotateRight} from "../../redux/actions";
 import './styles.scss';
-import {rotateLeft, rotateRight} from "../../redux/actions";
 
 
 const Scene = () => {
-    const myCamera = useRef();
     useEffect(() => {
         // let rightmousemove;
         // document.addEventListener("mousedown", function(event){
@@ -60,7 +59,6 @@ const Scene = () => {
                         maxPolarAngle={-2 * Math.PI}
                         minPolarAngle={Math.PI / 2}
                         maxAzimuthAngle={0}
-                        maxPolarAngle={2}
                     />
                     <Environment files={'./cube.hdr'} background={true} />
                 </Suspense>

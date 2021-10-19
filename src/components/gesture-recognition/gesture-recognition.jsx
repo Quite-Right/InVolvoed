@@ -5,25 +5,26 @@ import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
 import { drawHand } from "../../utils";
 import * as fp from "fingerpose";
-import victory from "../../images/victory.png";
-import thumbs_up from "../../images/thumbs_up.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVideo, faVideoSlash} from '@fortawesome/free-solid-svg-icons'
 import cn from "classnames";
 import './styles.scss';
-import {useMediaDevices} from "react-use";
-import {raisedHandGesture} from "../../gestureDescriptions/raisedHand";
+import {gestureMoveDefineTimeout, raisedHand, swipeLeftHand, swipeRightHand} from "../../constants";
+import {useDispatch} from "react-redux";
+import {rotateLeft, rotateRight, rotationStop} from "../../redux/actions";
+import {swipeLeftGesture, swipeRightGesture, raisedHandGesture} from "../../gestureDescriptions";
+// import {useWindowSize} from "react-use";
 
-export const GestureRecognition = ({appRef}) => {
+export const GestureRecognition = () => {
+    // const {width, height} = useWindowSize();
+    const dispatch = useDispatch();
     const [videoActive, setVideoActive] = useState(false);
     const [detectionInterval, setDetectionInterval] = useState(null);
     const [loadedPoses, setLoadedPoses] = useState(false);
+    const [swipeGestureLast, setSwipeGestureLast] = useState(null);
+    // TODO добавить обработку зума жестами (?)
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
-
-    const [pose, setPose] = useState(null);
-    const images = { thumbs_up: thumbs_up, victory: victory };
-
 
     useEffect( () => {
       const loadPoses = async () => {
@@ -59,7 +60,7 @@ export const GestureRecognition = ({appRef}) => {
 
 
         if (hand.length > 0) {
-          const GE = new fp.GestureEstimator([raisedHandGesture]);
+          const GE = new fp.GestureEstimator([raisedHandGesture, swipeLeftGesture, swipeRightGesture]);
           const gesture = await GE.estimate(hand[0].landmarks, 8);
           if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
             // console.log(gesture.gestures);
@@ -70,9 +71,41 @@ export const GestureRecognition = ({appRef}) => {
             const maxConfidence = confidence.indexOf(
               Math.max.apply(null, confidence)
             );
-            console.log(gesture.gestures[maxConfidence].name);
-            setPose(gesture.gestures[maxConfidence].name);
-            // console.log(pose);
+            const gestureName = gesture.gestures[maxConfidence].name;
+            console.log(gestureName);
+
+            if (gestureName === raisedHand) {
+                dispatch(rotationStop());
+                setSwipeGestureLast(null)
+            } else if (gestureName === swipeLeftHand || gestureName === swipeRightHand) {
+                if (!swipeGestureLast) {
+                    setSwipeGestureLast({
+                        gestureName,
+                        timeout: setTimeout(() => {setSwipeGestureLast(null)}, gestureMoveDefineTimeout)
+                    })
+                } else if (swipeGestureLast.gestureName === gestureName) {
+                    setSwipeGestureLast(swipeGestureLast => {
+                        clearTimeout(swipeGestureLast.timeout)
+                        return {
+                            gestureName,
+                            timeout: setTimeout(() => {setSwipeGestureLast(null)}, gestureMoveDefineTimeout)
+                        }
+                    })
+                } else {
+                    setSwipeGestureLast(swipeGestureLast => {
+                        clearTimeout(swipeGestureLast.timeout)
+                        return {
+                            gestureName,
+                            timeout: setTimeout(() => {setSwipeGestureLast(null)}, gestureMoveDefineTimeout)
+                        }
+                    })
+                    if (gestureName === swipeRightHand) {
+                        dispatch(rotateRight())
+                    } else {
+                        dispatch(rotateLeft())
+                    }
+                }
+            }
           }
         }
 
@@ -83,8 +116,6 @@ export const GestureRecognition = ({appRef}) => {
       }
     };
 
-    // useEffect(()=>{runHandpose()},[]);
-
     const toggleVideoActive = async () => {
       if (loadedPoses) {
         if (videoActive) {
@@ -94,12 +125,24 @@ export const GestureRecognition = ({appRef}) => {
           };
         } else {
           setVideoActive(true);
-          setInterval(() => {
+          const newDetectionInterval = setInterval(() => {
               detect(loadedPoses);
           }, 10);
+          setDetectionInterval(newDetectionInterval);
         }
       }
     }
+
+    // Unmounting hook
+    useEffect(() => {
+        return () => {
+            if (detectionInterval) {
+                clearInterval(detectionInterval);
+            } else if (swipeGestureLast) {
+                clearTimeout(swipeGestureLast.timeout)
+            }
+        }
+    }, [detectionInterval, swipeGestureLast]);
 
     return  <>
         {videoActive && createPortal(<div className={'gesture-recognition-container'}>
@@ -113,33 +156,14 @@ export const GestureRecognition = ({appRef}) => {
                     top: 0,
                     textAlign: "center",
                     zindex: 9,
-                    width: 640,
-                    height: 480,
+                    width: 320,
+                    height: 240,
                 }}
             />
-
             <canvas
                 ref={canvasRef}
                 className={'gesture-canvas'}
             />
-
-            {pose !== null ? (
-                <img
-                    src={images[pose]}
-                    style={{
-                        position: "absolute",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        left: 400,
-                        bottom: 500,
-                        right: 0,
-                        textAlign: "center",
-                        height: 100,
-                    }}
-                />
-            ) : (
-                ""
-            )}
         </div>, document.querySelector('.App'))}
         <div className={cn('video-container', videoActive && 'video-container_active',
             !loadedPoses && 'video-container_disabled')} onClick={loadedPoses ? toggleVideoActive : undefined}>
