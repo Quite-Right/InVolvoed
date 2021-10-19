@@ -25,6 +25,10 @@ export const GestureRecognition = () => {
     // TODO добавить обработку зума жестами (?)
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
+    const clearSwipeGestureLast = () => {
+        console.log('clearSwipeGestureLast')
+        setSwipeGestureLast(null);
+    };
 
     useEffect( () => {
       const loadPoses = async () => {
@@ -81,7 +85,7 @@ export const GestureRecognition = () => {
                     console.log('!swipeGestureLast');
                     setSwipeGestureLast({
                         gestureName,
-                        timeout: setTimeout(() => {setSwipeGestureLast(null)}, gestureMoveDefineTimeout)
+                        timeout: setTimeout(clearSwipeGestureLast, gestureMoveDefineTimeout)
                     })
                 } else if (swipeGestureLast.gestureName === gestureName) {
                     console.log('same')
@@ -89,7 +93,7 @@ export const GestureRecognition = () => {
                         clearTimeout(swipeGestureLast.timeout)
                         return {
                             gestureName,
-                            timeout: setTimeout(() => {setSwipeGestureLast(null)}, gestureMoveDefineTimeout)
+                            timeout: setTimeout(clearSwipeGestureLast, gestureMoveDefineTimeout)
                         }
                     })
                 } else {
@@ -98,7 +102,7 @@ export const GestureRecognition = () => {
                         clearTimeout(swipeGestureLast.timeout)
                         return {
                             gestureName,
-                            timeout: setTimeout(() => {setSwipeGestureLast(null)}, gestureMoveDefineTimeout)
+                            timeout: setTimeout(clearSwipeGestureLast, gestureMoveDefineTimeout)
                         }
                     })
                     if (gestureName === swipeRightHand) {
