@@ -134,15 +134,15 @@ export const GestureRecognition = () => {
     }
 
     // Unmounting hook
-    useEffect(() => {
-        return () => {
-            if (detectionInterval) {
-                clearInterval(detectionInterval);
-            } else if (swipeGestureLast) {
-                clearTimeout(swipeGestureLast.timeout)
-            }
-        }
-    }, [detectionInterval, swipeGestureLast]);
+    // useEffect(() => {
+    //     return () => {
+    //         if (detectionInterval) {
+    //             clearInterval(detectionInterval);
+    //         } else if (swipeGestureLast) {
+    //             clearTimeout(swipeGestureLast.timeout)
+    //         }
+    //     }
+    // }, [detectionInterval, swipeGestureLast]);
 
     return  <>
         {videoActive && createPortal(<div className={'gesture-recognition-container'}>
