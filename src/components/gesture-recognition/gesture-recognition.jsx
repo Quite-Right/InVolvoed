@@ -120,6 +120,8 @@ export const GestureRecognition = () => {
       }
     };
 
+    useEffect(() => console.log(swipeGestureLast), [swipeGestureLast]);
+
     const toggleVideoActive = async () => {
       if (loadedPoses) {
         if (videoActive) {
