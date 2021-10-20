@@ -13,7 +13,8 @@ import {
     raisedHand,
     leftHandSwipeLeftPosition,
     leftHandSwipeRightPosition,
-    rightHandSwipeLeftPosition, rightHandSwipeRightPosition
+    rightHandSwipeLeftPosition,
+    rightHandSwipeRightPosition
 } from "../../constants";
 import {useDispatch} from "react-redux";
 import {rotateLeft, rotateRight, rotationStop} from "../../redux/actions";
@@ -120,8 +121,6 @@ export const GestureRecognition = () => {
         }
     };
 
-    useEffect(() => console.log(lastGesture), [lastGesture]);
-
     const toggleVideoActive = async () => {
       if (loadedPoses) {
         if (videoActive) {
@@ -139,7 +138,7 @@ export const GestureRecognition = () => {
       }
     }
 
-    useInterval(() => detect(loadedPoses), videoActive ? 100 : null);
+    useInterval(() => detect(loadedPoses), videoActive ? 300 : null);
 
     return  <>
         {videoActive && createPortal(<div className={'gesture-recognition-container'}>

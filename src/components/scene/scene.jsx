@@ -13,30 +13,13 @@ import './styles.scss';
 
 
 const Scene = () => {
-    useEffect(() => {
-        // let rightmousemove;
-        // document.addEventListener("mousedown", function(event){
-        //     rightmousemove = false;
-        //     if(event.button == 2){
-        //         rightmousemove = true;
-        //         return false;
-        //         //   // Right click
-        //     }
-        // });
-        // document.addEventListener("mousemove", function(event){
-        //     if(rightmousemove === true){
-        //         // Use stopImmediatePropagation to stop the other handeller from trigerring
-        //         event.stopImmediatePropagation();
-        //     }
-        // });
-    }, [])
 
     const rotation = useSelector(rotationSelector);
     const dispatch = useDispatch();
 
     return (
         <div className={'scene-container'}>
-            <Canvas id={'three-scene'} shadowMap>
+            <Canvas id={'three-scene'}>
                 <Suspense fallback={<Loader />}>
                     {/*<rectAreaLight position={new THREE.Vector3(1, 1, 1)}/>*/}
                     {/*<ambientLight*/}

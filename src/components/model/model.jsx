@@ -6,12 +6,11 @@ import * as THREE from 'three';
 
 const MODEL_URL = './auto33.gltf';
 
-export default function Model(props) {
+export default function Model() {
     const  group = useRef();
     const gltf = useLoader(GLTFLoader, MODEL_URL);
     const {scene , materials, animations, nodes} = gltf;
     const [[windowMaterial], setMaterials] = useState([]);
-    console.log(gltf)
     const {actions, clips, mixer} = useAnimations(animations, scene);
     const [carActions, setCarActions] = useState();
 
@@ -111,10 +110,9 @@ export default function Model(props) {
         }
     }, [carActions])
 
+    console.log('model rerender');
     return (
-        <>
             <primitive object={gltf.scene} scale={1} ref={group} />
-        </>
     );
 }
 
