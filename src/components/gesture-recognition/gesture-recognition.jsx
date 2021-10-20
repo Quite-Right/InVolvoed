@@ -147,15 +147,15 @@ export const GestureRecognition = () => {
 
     useEffect(() => {
         let timeout;
-        if (videoActive) {
-            timeout = setTimeout(detect, 30)
+        if (videoActive && loadedPoses) {
+            timeout = setTimeout(() => detect(loadedPoses), 30)
         }
         return () => {
             if (timeout) {
                 clearTimeout(timeout);
             }
         }
-    }, [detectionTries, videoActive]);
+    }, [detectionTries, videoActive, loadedPoses]);
 
     // Unmounting hook
     // useEffect(() => {
