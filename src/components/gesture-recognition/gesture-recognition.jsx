@@ -139,7 +139,7 @@ export const GestureRecognition = () => {
       }
     }
 
-    useInterval(() => detect(loadedPoses), videoActive ? 30 : null);
+    useInterval(() => detect(loadedPoses), videoActive ? 100 : null);
 
     return  <>
         {videoActive && createPortal(<div className={'gesture-recognition-container'}>
