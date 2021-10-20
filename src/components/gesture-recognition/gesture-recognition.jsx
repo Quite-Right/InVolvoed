@@ -40,6 +40,7 @@ export const GestureRecognition = () => {
     }, []);
 
     const detect = async (net) => {
+        console.log("DETECT")
       // Check data is available
       if (
         typeof webcamRef.current !== "undefined" &&
@@ -146,6 +147,7 @@ export const GestureRecognition = () => {
     }
 
     useEffect(() => {
+        console.log('HOOK CALL');
         let timeout;
         if (videoActive && loadedPoses) {
             timeout = setTimeout(() => detect(loadedPoses), 30)
