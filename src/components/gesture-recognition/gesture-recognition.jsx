@@ -3,16 +3,26 @@ import {useEffect, useState, useRef} from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
-import { drawHand } from "../../utils";
 import * as fp from "fingerpose";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVideo, faVideoSlash} from '@fortawesome/free-solid-svg-icons'
 import cn from "classnames";
 import './styles.scss';
-import {gestureMoveDefineTimeout, raisedHand, swipeLeftHand, swipeRightHand} from "../../constants";
+import {
+    gestureMoveDefineTimeout,
+    raisedHand,
+    leftHandSwipeLeftPosition,
+    leftHandSwipeRightPosition,
+    rightHandSwipeLeftPosition, rightHandSwipeRightPosition
+} from "../../constants";
 import {useDispatch} from "react-redux";
 import {rotateLeft, rotateRight, rotationStop} from "../../redux/actions";
-import {swipeLeftGesture, swipeRightGesture, raisedHandGesture} from "../../gestureDescriptions";
+import {
+    leftHandSwipeLeftPositionGesture,
+    leftHandSwipeRightPositionGesture,
+    raisedHandGesture,
+    rightHandSwipeLeftPositionGesture, rightHandSwipeRightPositionGesture
+} from "../../gestureDescriptions";
 import {useInterval} from "react-use";
 // import {useWindowSize} from "react-use";
 
@@ -21,14 +31,10 @@ export const GestureRecognition = () => {
     const dispatch = useDispatch();
     const [videoActive, setVideoActive] = useState(false);
     const [loadedPoses, setLoadedPoses] = useState(false);
-    const [swipeGestureLast, setSwipeGestureLast] = useState(null);
+    const [lastGesture, setLastGesture] = useState(null);
     // TODO добавить обработку зума жестами (?)
     const webcamRef = useRef(null);
     const canvasRef = useRef(null);
-    const clearSwipeGestureLast = () => {
-        console.log('clearSwipeGestureLast')
-        setSwipeGestureLast(null);
-    };
 
     useEffect( () => {
       const loadPoses = async () => {
@@ -64,7 +70,7 @@ export const GestureRecognition = () => {
         const hand = await net.estimateHands(video);
 
         if (hand.length > 0) {
-          const GE = new fp.GestureEstimator([raisedHandGesture, swipeLeftGesture, swipeRightGesture]);
+          const GE = new fp.GestureEstimator([raisedHandGesture, leftHandSwipeLeftPositionGesture, leftHandSwipeRightPositionGesture, rightHandSwipeLeftPositionGesture, rightHandSwipeRightPositionGesture]);
           const gesture = await GE.estimate(hand[0].landmarks, 8);
           if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
             // console.log(gesture.gestures);
@@ -80,53 +86,44 @@ export const GestureRecognition = () => {
 
             if (gestureName === raisedHand) {
                 dispatch(rotationStop());
-                setSwipeGestureLast(null)
-            } else if (gestureName === swipeLeftHand || gestureName === swipeRightHand) {
+            } else if (gestureName === leftHandSwipeLeftPosition || gestureName === leftHandSwipeRightPosition ||
+                gestureName === rightHandSwipeLeftPosition || gestureName === rightHandSwipeRightPosition) {
                 console.log('swipe')
-                if (!swipeGestureLast) {
-                    console.log('!swipeGestureLast');
-                    setSwipeGestureLast({
-                        gestureName,
-                        timestamp: Date.now(),
-                    })
-                } else if (swipeGestureLast.gestureName === gestureName) {
+                if (!lastGesture) {
+                    console.log('!lastGesture');
+                } else if (lastGesture.gestureName === gestureName) {
                     console.log('same')
-                    setSwipeGestureLast(swipeGestureLast => {
-                        return {
-                            gestureName,
-                            timestamp: Date.now(),
-                        }
-                    })
                 } else {
                     console.log('not same')
-                    setSwipeGestureLast(swipeGestureLast => {
-                        return {
-                            gestureName,
-                            timestamp: Date.now(),
-                        }
-                    })
-                    if (Date.now() - swipeGestureLast.timestamp <= gestureMoveDefineTimeout) {
-                        if (gestureName === swipeRightHand) {
+                    if (Date.now() - lastGesture.timestamp <= gestureMoveDefineTimeout) {
+                        if ((gestureName === leftHandSwipeRightPosition
+                            && lastGesture.gestureName === leftHandSwipeLeftPosition)
+                            || (gestureName === rightHandSwipeRightPosition &&
+                                lastGesture.gestureName === rightHandSwipeLeftPosition)
+                        ) {
                             console.log('rotateRight')
                             dispatch(rotateRight())
-                        } else {
+                        } else if ((gestureName === leftHandSwipeLeftPosition
+                            && lastGesture.gestureName === leftHandSwipeRightPosition )
+                            || (gestureName === rightHandSwipeLeftPosition &&
+                                lastGesture.gestureName === rightHandSwipeRightPosition )
+                        ) { {
                             console.log('rotateLeft')
                             dispatch(rotateLeft())
                         }
                     }
                 }
             }
+              setLastGesture({
+                  gestureName,
+                  timestamp: Date.now(),
+              })
           }
         }
-
-
-        // Draw mesh
-        const ctx = canvasRef.current.getContext("2d");
-        drawHand(hand, ctx);
       }
     };
 
-    useEffect(() => console.log(swipeGestureLast), [swipeGestureLast]);
+    useEffect(() => console.log(lastGesture), [lastGesture]);
 
     const toggleVideoActive = async () => {
       if (loadedPoses) {
@@ -147,19 +144,6 @@ export const GestureRecognition = () => {
 
     useInterval(() => detect(loadedPoses), videoActive ? 30 : null);
 
-
-
-    // Unmounting hook
-    // useEffect(() => {
-    //     return () => {
-    //         if (detectionInterval) {
-    //             clearInterval(detectionInterval);
-    //         } else if (swipeGestureLast) {
-    //             clearTimeout(swipeGestureLast.timeout)
-    //         }
-    //     }
-    // }, [detectionInterval, swipeGestureLast]);
-
     return  <>
         {videoActive && createPortal(<div className={'gesture-recognition-container'}>
             <Webcam
@@ -176,10 +160,6 @@ export const GestureRecognition = () => {
                     height: 240,
                 }}
             />
-            <canvas
-                ref={canvasRef}
-                className={'gesture-canvas'}
-            />
         </div>, document.querySelector('.App'))}
         <div className={cn('video-container', videoActive && 'video-container_active',
             !loadedPoses && 'video-container_disabled')} onClick={loadedPoses ? toggleVideoActive : undefined}>
@@ -187,4 +167,3 @@ export const GestureRecognition = () => {
         </div>
     </>
 }
-

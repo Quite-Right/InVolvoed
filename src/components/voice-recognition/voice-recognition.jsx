@@ -3,10 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophoneAlt, faMicrophoneAltSlash } from '@fortawesome/free-solid-svg-icons'
 import cn from 'classnames';
 import stringSimilarity from 'string-similarity';
-import './styles.scss';
 import {defaultCommand, maintenanceCommand, startCommand, stopCommand, PREDICTION_ACCURACY} from "../../constants";
 import {defineDayTimeAppeal} from "../../utils/defineDayTime";
-
+import './styles.scss';
 
 export const VoiceRecognition = () => {
     const [recognizer, setRecognizer] = useState(null);

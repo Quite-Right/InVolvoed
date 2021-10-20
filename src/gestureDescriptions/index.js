@@ -1,3 +1,5 @@
 export * from './raisedHand';
-export * from './swipeLeftPosition';
-export * from './swipeRightPosition';
+export * from './leftHandSwipeLeftPosition';
+export * from './leftHandSwipeRightPosition';
+export * from './rightHandSwipeLeftPosition';
+export * from './rightHandSwipeRightPosition';
