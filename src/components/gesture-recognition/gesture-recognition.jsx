@@ -20,7 +20,6 @@ export const GestureRecognition = () => {
     // const {width, height} = useWindowSize();
     const dispatch = useDispatch();
     const [videoActive, setVideoActive] = useState(false);
-    const [detectionInterval, setDetectionInterval] = useState(null);
     const [loadedPoses, setLoadedPoses] = useState(false);
     const [swipeGestureLast, setSwipeGestureLast] = useState(null);
     // TODO добавить обработку зума жестами (?)
@@ -30,7 +29,6 @@ export const GestureRecognition = () => {
         console.log('clearSwipeGestureLast')
         setSwipeGestureLast(null);
     };
-    const [detectionTries, setDetectionTries] = useState(0);
 
     useEffect( () => {
       const loadPoses = async () => {
@@ -42,7 +40,7 @@ export const GestureRecognition = () => {
 
 
     const detect = async (net) => {
-        console.log("DETECT")
+        // console.log("DETECT")
       // Check data is available
       if (
         typeof webcamRef.current !== "undefined" &&
@@ -125,7 +123,6 @@ export const GestureRecognition = () => {
         // Draw mesh
         const ctx = canvasRef.current.getContext("2d");
         drawHand(hand, ctx);
-        setDetectionTries(detectionTries => detectionTries + 1);
       }
     };
 
@@ -151,7 +148,6 @@ export const GestureRecognition = () => {
     useInterval(() => detect(loadedPoses), videoActive ? 30 : null);
 
 
-    console.log('detectionTries ', detectionTries)
 
     // Unmounting hook
     // useEffect(() => {
