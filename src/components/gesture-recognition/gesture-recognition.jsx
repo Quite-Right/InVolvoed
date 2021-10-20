@@ -13,6 +13,7 @@ import {gestureMoveDefineTimeout, raisedHand, swipeLeftHand, swipeRightHand} fro
 import {useDispatch} from "react-redux";
 import {rotateLeft, rotateRight, rotationStop} from "../../redux/actions";
 import {swipeLeftGesture, swipeRightGesture, raisedHandGesture} from "../../gestureDescriptions";
+import {useInterval} from "react-use";
 // import {useWindowSize} from "react-use";
 
 export const GestureRecognition = () => {
@@ -38,6 +39,7 @@ export const GestureRecognition = () => {
       }
       loadPoses();
     }, []);
+
 
     const detect = async (net) => {
         console.log("DETECT")
@@ -146,18 +148,8 @@ export const GestureRecognition = () => {
       }
     }
 
-    useEffect(() => {
-        console.log('HOOK CALL');
-        let timeout;
-        if (videoActive && loadedPoses) {
-            timeout = setTimeout(() => detect(loadedPoses), 30)
-        }
-        return () => {
-            if (timeout) {
-                clearTimeout(timeout);
-            }
-        }
-    }, [detectionTries, videoActive, loadedPoses]);
+    useInterval(() => detect(loadedPoses), videoActive ? 30 : null);
+
 
     console.log('detectionTries ', detectionTries)
 
