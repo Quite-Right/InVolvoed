@@ -14,7 +14,7 @@ import {
     leftHandSwipeLeftPosition,
     leftHandSwipeRightPosition,
     rightHandSwipeLeftPosition,
-    rightHandSwipeRightPosition
+    rightHandSwipeRightPosition, swipeCenterPosition, swipeLeftPosition, swipeRightPosition
 } from "../../constants";
 import {useDispatch} from "react-redux";
 import {rotateLeft, rotateRight, rotationStop} from "../../redux/actions";
@@ -22,7 +22,10 @@ import {
     leftHandSwipeLeftPositionGesture,
     leftHandSwipeRightPositionGesture,
     raisedHandGesture,
-    rightHandSwipeLeftPositionGesture, rightHandSwipeRightPositionGesture
+    rightHandSwipeLeftPositionGesture,
+    rightHandSwipeRightPositionGesture,
+    swipeCenterPositionGesture, swipeLeftPositionGesture,
+    swipeRightPositionGesture
 } from "../../gestureDescriptions";
 import {useInterval} from "react-use";
 // import {useWindowSize} from "react-use";
@@ -66,7 +69,8 @@ export const GestureRecognition = () => {
             const hand = await net.estimateHands(video);
 
             if (hand.length > 0) {
-                const GE = new fp.GestureEstimator([raisedHandGesture, leftHandSwipeLeftPositionGesture, leftHandSwipeRightPositionGesture, rightHandSwipeLeftPositionGesture, rightHandSwipeRightPositionGesture]);
+                const GE = new fp.GestureEstimator([raisedHandGesture, swipeCenterPositionGesture,
+                    swipeRightPositionGesture, swipeLeftPositionGesture]);
                 const gesture = await GE.estimate(hand[0].landmarks, 8);
                 if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
                     // console.log(gesture.gestures);
@@ -78,12 +82,13 @@ export const GestureRecognition = () => {
                         Math.max.apply(null, confidence)
                     );
                     const gestureName = gesture.gestures[maxConfidence].name;
+                    const lastGestureName = lastGesture?.gestureName;
+
                     console.log(gestureName);
 
                     if (gestureName === raisedHand) {
                         dispatch(rotationStop());
-                    } else if (gestureName === leftHandSwipeLeftPosition || gestureName === leftHandSwipeRightPosition ||
-                        gestureName === rightHandSwipeLeftPosition || gestureName === rightHandSwipeRightPosition) {
+                    } else {
                         console.log('swipe')
                         if (!lastGesture) {
                             console.log('!lastGesture');
@@ -92,19 +97,16 @@ export const GestureRecognition = () => {
                         } else {
                             console.log('not same')
                             if (Date.now() - lastGesture.timestamp <= gestureMoveDefineTimeout) {
-                                console.log('inner not same')
-                                if ((gestureName === leftHandSwipeRightPosition
-                                    && lastGesture.gestureName === leftHandSwipeLeftPosition)
-                                    || (gestureName === rightHandSwipeRightPosition &&
-                                        lastGesture.gestureName === rightHandSwipeLeftPosition)
-                                ) {
+                                console.log('inner not same');
+                                if ((lastGestureName === swipeLeftPosition && gestureName === swipeCenterPosition) ||
+                                    (lastGestureName === swipeCenterPosition && gestureName === swipeRightPosition) ||
+                                    (lastGestureName === swipeLeftPosition && gestureName === swipeRightPosition)) {
                                     console.log('rotateRight')
                                     dispatch(rotateRight())
-                                } else if ((gestureName === leftHandSwipeLeftPosition
-                                    && lastGesture.gestureName === leftHandSwipeRightPosition)
-                                    || (gestureName === rightHandSwipeLeftPosition &&
-                                        lastGesture.gestureName === rightHandSwipeRightPosition)
-                                ) {
+                                } else if ((lastGestureName === swipeRightPosition && gestureName === swipeCenterPosition) ||
+                                    (lastGestureName === swipeCenterPosition && gestureName === swipeLeftPosition) ||
+                                    (lastGestureName === swipeRightPosition && gestureName === swipeLeftPosition))
+                                {
                                     console.log('rotateLeft')
                                     dispatch(rotateLeft());
                                 }

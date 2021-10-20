@@ -13,24 +13,12 @@ import './styles.scss';
 
 
 const Scene = () => {
-
     const rotation = useSelector(rotationSelector);
     const dispatch = useDispatch();
-
     return (
         <div className={'scene-container'}>
             <Canvas id={'three-scene'}>
                 <Suspense fallback={<Loader />}>
-                    {/*<rectAreaLight position={new THREE.Vector3(1, 1, 1)}/>*/}
-                    {/*<ambientLight*/}
-                    {/*    castShadow={true} intensity={1} position={new THREE.Vector3(0, 3, 0)}*/}
-                    {/*    shadowType={{*/}
-                    {/*        enabled: true,*/}
-                    {/*        type: THREE.BasicShadowMap,*/}
-                    {/*    }}*/}
-                    {/*/>*/}
-
-                    {/*<PerspectiveCamera ref={myCamera}/>*/}
                     <Model />
                     <OrbitControls
                         target={new THREE.Vector3(0, 3, 0)}
