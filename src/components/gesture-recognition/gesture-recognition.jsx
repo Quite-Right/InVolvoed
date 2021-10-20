@@ -92,6 +92,7 @@ export const GestureRecognition = () => {
                         } else {
                             console.log('not same')
                             if (Date.now() - lastGesture.timestamp <= gestureMoveDefineTimeout) {
+                                console.log('inner not same')
                                 if ((gestureName === leftHandSwipeRightPosition
                                     && lastGesture.gestureName === leftHandSwipeLeftPosition)
                                     || (gestureName === rightHandSwipeRightPosition &&
@@ -104,10 +105,8 @@ export const GestureRecognition = () => {
                                     || (gestureName === rightHandSwipeLeftPosition &&
                                         lastGesture.gestureName === rightHandSwipeRightPosition)
                                 ) {
-                                    {
-                                        console.log('rotateLeft')
-                                        dispatch(rotateLeft())
-                                    }
+                                    console.log('rotateLeft')
+                                    dispatch(rotateLeft());
                                 }
                             }
                         }
