@@ -34,7 +34,6 @@ export const GestureRecognition = () => {
     const [lastGesture, setLastGesture] = useState(null);
     // TODO добавить обработку зума жестами (?)
     const webcamRef = useRef(null);
-    const canvasRef = useRef(null);
 
     useEffect( () => {
       const loadPoses = async () => {
@@ -61,10 +60,6 @@ export const GestureRecognition = () => {
             // Set video width
             webcamRef.current.video.width = videoWidth;
             webcamRef.current.video.height = videoHeight;
-
-            // Set canvas height and width
-            canvasRef.current.width = videoWidth;
-            canvasRef.current.height = videoHeight;
 
             // Make Detections
             const hand = await net.estimateHands(video);
