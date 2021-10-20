@@ -29,6 +29,7 @@ export const GestureRecognition = () => {
         console.log('clearSwipeGestureLast')
         setSwipeGestureLast(null);
     };
+    const [detectionTries, setDetectionTries] = useState(0);
 
     useEffect( () => {
       const loadPoses = async () => {
@@ -121,6 +122,7 @@ export const GestureRecognition = () => {
         // Draw mesh
         const ctx = canvasRef.current.getContext("2d");
         drawHand(hand, ctx);
+        setDetectionTries(detectionTries => detectionTries + 1);
       }
     };
 
@@ -130,18 +132,30 @@ export const GestureRecognition = () => {
       if (loadedPoses) {
         if (videoActive) {
           setVideoActive(false);
-          if (detectionInterval) {
-              clearInterval(detectionInterval);
-          };
+          // if (detectionInterval) {
+          //     clearInterval(detectionInterval);
+          // };
         } else {
           setVideoActive(true);
-          const newDetectionInterval = setInterval(() => {
-              detect(loadedPoses);
-          }, 10);
-          setDetectionInterval(newDetectionInterval);
+          // const newDetectionInterval = setInterval(() => {
+          //     detect(loadedPoses);
+          // }, 10);
+          // setDetectionInterval(newDetectionInterval);
         }
       }
     }
+
+    useEffect(() => {
+        let timeout;
+        if (videoActive) {
+            timeout = setTimeout(detect, 30)
+        }
+        return () => {
+            if (timeout) {
+                clearTimeout(timeout);
+            }
+        }
+    }, [detectionTries, videoActive]);
 
     // Unmounting hook
     // useEffect(() => {
