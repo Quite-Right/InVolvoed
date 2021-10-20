@@ -159,6 +159,8 @@ export const GestureRecognition = () => {
         }
     }, [detectionTries, videoActive, loadedPoses]);
 
+    console.log('detectionTries ', detectionTries)
+
     // Unmounting hook
     // useEffect(() => {
     //     return () => {
