@@ -1,58 +1,91 @@
-export const START_ENGINE = 'START_ENGINE';
-export const STOP_ENGINE = ' STOP_ENGINE';
-export const _START = 'LOCK_CAR_START';
-export const LOCK_CAR_COMPLETE = 'LOCK_CAR_COMPLETE';
-export const LOCK_CAR_ERROR = 'LOCK_CAR_ERROR';
+import {engineSelector} from "../selectors";
 
-export const lockCarActionCreator = () => ({
-    type: LOCK_CAR,
+export const ENGINE_ON = 'ENGINE_ON';
+export const ENGINE_OFF = 'ENGINE_OFF';
+export const ENGINE_TOGGLE_START = 'ENGINE_TOGGLE_START';
+export const ENGINE_TOGGLE_COMPLETE = 'ENGINE_TOGGLE_COMPLETE';
+export const ENGINE_ERROR = 'ENGINE_ERROR';
+export const UNSET_ENGINE_ERROR ='UNSET_ENGINE_ERROR';
+
+export const engineOnActionCreator = () => ({
+    type: ENGINE_ON,
 });
 
-export const unlockCarActionCreator = () => ({
-    type: UNLOCK_CAR,
+export const engineOffActionCreator = () => ({
+    type: ENGINE_OFF,
 });
 
-export const lockCarCompleteActionCreator = () => ({
-    type: LOCK_CAR_COMPLETE,
+export const engineToggleCompleteActionCreator = () => ({
+    type: ENGINE_TOGGLE_COMPLETE,
 });
 
-export const lockCarStartActionCreator = () => ({
-    type: LOCK_CAR_START,
+export const engineToggleStartActionCreator = () => ({
+    type: ENGINE_TOGGLE_START,
 })
 
-export const lockCarErrorActionCreator = (error) => ({
-    type: LOCK_CAR_ERROR,
+export const engineErrorActionCreator = (error) => ({
+    type: ENGINE_ERROR,
     payload: error,
 })
 
-export const unlockCar = async (dispatch) => {
+export const unsetClimatizationErrorActionCreator = () => ({
+    type: UNSET_ENGINE_ERROR,
+})
+
+
+export const engineOff = (onSuccess, onError) => async (dispatch) => {
     try {
-        dispatch(lockCarStartActionCreator());
         const asyncData = await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);
         });
-        dispatch(unlockCarActionCreator());
-        dispatch(lockCarCompleteActionCreator());
+        dispatch(engineOffActionCreator());
+        dispatch(engineToggleCompleteActionCreator());
+        if (onSuccess) {
+            onSuccess();
+        }
     } catch (error) {
-        dispatch(lockCarCompleteActionCreator());
-        dispatch(lockCarErrorActionCreator(error));
+        dispatch(engineToggleCompleteActionCreator());
+        dispatch(engineErrorActionCreator(error));
+        if (onError) {
+            onError();
+        }
     }
 }
 
-export const lockCar = async (dispatch) => {
+export const engineOn = (onSuccess, onError) => async (dispatch) => {
     try {
-        dispatch(lockCarStartActionCreator());
         const asyncData = await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);
         });
-        dispatch(lockCarActionCreator());
-        dispatch(lockCarCompleteActionCreator());
+        dispatch(engineOnActionCreator());
+        dispatch(engineToggleCompleteActionCreator());
+        if (onSuccess) {
+            onSuccess();
+        }
     } catch (error) {
-        dispatch(lockCarCompleteActionCreator());
-        dispatch(lockCarErrorActionCreator(error));
+        dispatch(engineToggleCompleteActionCreator());
+        dispatch(engineErrorActionCreator(error));
+        if (onError) {
+            onError();
+        }
+    }
+}
+
+export const toggleCarEngine = (onSuccess, onError) => async (dispatch, getStore) => {
+    const store = getStore();
+    const {error, isTurnedOn} = engineSelector(store);
+    dispatch(engineToggleStartActionCreator())
+    if (error) {
+        dispatch(unsetClimatizationErrorActionCreator());
+    }
+    if (isTurnedOn) {
+        dispatch(engineOff(onSuccess, onError));
+    }
+    else {
+        dispatch(engineOn(onSuccess, onError));
     }
 }

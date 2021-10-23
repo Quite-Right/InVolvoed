@@ -1,0 +1,5 @@
+@import "../../mixins/fixed-menu-button-container";
+
+.lock-container {
+  @include fixed-menu-button-container;
+}

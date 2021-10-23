@@ -3,10 +3,12 @@ import {useAnimations, useGLTF} from '@react-three/drei'
 import {useLoader} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from 'three';
+import {useSelector} from "react-redux";
+import {carColorSelector} from "../../redux/selectors";
 
 const MODEL_URL = './auto33.gltf';
 
-export default function Model() {
+export default function Model({color}) {
     const  group = useRef();
     const gltf = useLoader(GLTFLoader, MODEL_URL);
     const {scene , materials, animations, nodes} = gltf;
@@ -14,12 +16,27 @@ export default function Model() {
     const {actions, clips, mixer} = useAnimations(animations, scene);
     const [carActions, setCarActions] = useState();
 
+    useEffect(() => {
+        console.log(materials)
+        console.log(color)
+        if (color) {
+            materials['MetallicBlue'].color = color;
+        }
+
+        // применить материалы в зависимости от текущего материала
+        // const changeColor = (materialName)
+        //     for (const key in nodes) {
+        //         if (nodes[key].material?.name === 'MetallicBlue')
+        //             nodes[key].material = materials['MetallicRed']
+        //     }
+    }, [color])
+
     // useEffect(() => {
     //     const windowMaterial = materials['glass_w'];
     //
     //     const newWindowMaterial = windowMaterial.clone();
     //
-    //     newWindowMaterial.color = new THREE.Color(10, 1, 1);
+    //     newWindowMaterial.change-color-button = new THREE.Color(10, 1, 1);
     //
     //     setMaterials((materials) => {
     //         const newMaterialsArray = [...materials];
@@ -58,13 +75,7 @@ export default function Model() {
         }
     }, [])
 
-    // применить материалы в зависимости от текущего материала
-    useEffect(() => {
-        for (const key in nodes) {
-            if (nodes[key].material?.name === 'MetallicBlue')
-            nodes[key].material = materials['MetallicRed']
-        }
-    }, [])
+
 
     // создание анимаций
     useEffect(() => {
@@ -99,11 +110,11 @@ export default function Model() {
                 // carActions['FrontLeftDoorToggle']();
                 // carActions['FrontLeftDoorWindowToggle']();
                 // carActions['BackLeftDoorWindowToggle']();
-                carActions['TrunkToggle']();
-                setTimeout(carActions['FrontRightDoorWindowToggle'], 2000)
-                setTimeout(carActions['BackRightDoorToggle'], 2000)
-                setTimeout(carActions['BackRightDoorWindowToggle'], 2000)
-                setTimeout(carActions['TrunkToggle'], 2000)
+                // carActions['TrunkToggle']();
+                // setTimeout(carActions['FrontRightDoorWindowToggle'], 2000)
+                // setTimeout(carActions['BackRightDoorToggle'], 2000)
+                // setTimeout(carActions['BackRightDoorWindowToggle'], 2000)
+                // setTimeout(carActions['TrunkToggle'], 2000)
 
 
             }, 5000)
@@ -112,7 +123,7 @@ export default function Model() {
 
     console.log('model rerender');
     return (
-            <primitive object={gltf.scene} scale={1} ref={group} />
+        <primitive object={gltf.scene} scale={1} ref={group} />
     );
 }
 

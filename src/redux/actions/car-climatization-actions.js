@@ -1,58 +1,91 @@
-export const LOCK_CAR = 'LOCK_CAR ';
-export const UNLOCK_CAR = ' UNLOCK_CAR';
-export const LOCK_CAR_START = 'LOCK_CAR_START';
-export const LOCK_CAR_COMPLETE = 'LOCK_CAR_COMPLETE';
-export const LOCK_CAR_ERROR = 'LOCK_CAR_ERROR';
+import {climatizationSelector} from "../selectors";
 
-export const lockCarActionCreator = () => ({
-    type: LOCK_CAR,
+export const CLIMATIZATION_ON = 'CLIMATIZATION_ON';
+export const CLIMATIZATION_OFF = 'CLIMATIZATION_OFF';
+export const CLIMATIZATION_TOGGLE_START = 'CLIMATIZATION_TOGGLE_START';
+export const CLIMATIZATION_TOGGLE_COMPLETE = 'CLIMATIZATION_TOGGLE_COMPLETE';
+export const CLIMATIZATION_ERROR = 'CLIMATIZATION_ERROR';
+export const UNSET_CLIMATIZATION_ERROR ='UNSET_CLIMATIZATION_ERROR';
+
+export const climatizationOnActionCreator = () => ({
+    type: CLIMATIZATION_ON,
 });
 
-export const unlockCarActionCreator = () => ({
-    type: UNLOCK_CAR,
+export const climatizationOffActionCreator = () => ({
+    type: CLIMATIZATION_OFF,
 });
 
-export const lockCarCompleteActionCreator = () => ({
-    type: LOCK_CAR_COMPLETE,
+export const climatizationToggleCompleteActionCreator = () => ({
+    type: CLIMATIZATION_TOGGLE_COMPLETE,
 });
 
-export const lockCarStartActionCreator = () => ({
-    type: LOCK_CAR_START,
+export const climatizationToggleStartActionCreator = () => ({
+    type: CLIMATIZATION_TOGGLE_START,
 })
 
-export const lockCarErrorActionCreator = (error) => ({
-    type: LOCK_CAR_ERROR,
+export const climatizationErrorActionCreator = (error) => ({
+    type: CLIMATIZATION_ERROR,
     payload: error,
 })
 
-export const unlockCar = async (dispatch) => {
+export const unsetClimatizationErrorActionCreator = () => ({
+    type: UNSET_CLIMATIZATION_ERROR,
+})
+
+
+export const climatizationOff = (onSuccess, onError) => async (dispatch) => {
     try {
-        dispatch(lockCarStartActionCreator());
         const asyncData = await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);
         });
-        dispatch(unlockCarActionCreator());
-        dispatch(lockCarCompleteActionCreator());
+        dispatch(climatizationOffActionCreator());
+        dispatch(climatizationToggleCompleteActionCreator());
+        if (onSuccess) {
+            onSuccess();
+        }
     } catch (error) {
-        dispatch(lockCarCompleteActionCreator());
-        dispatch(lockCarErrorActionCreator(error));
+        dispatch(climatizationToggleCompleteActionCreator());
+        dispatch(climatizationErrorActionCreator(error));
+        if (onError) {
+            onError();
+        }
     }
 }
 
-export const lockCar = async (dispatch) => {
+export const climatizationOn = (onSuccess, onError) => async (dispatch) => {
     try {
-        dispatch(lockCarStartActionCreator());
         const asyncData = await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);
         });
-        dispatch(lockCarActionCreator());
-        dispatch(lockCarCompleteActionCreator());
+        dispatch(climatizationOnActionCreator());
+        dispatch(climatizationToggleCompleteActionCreator());
+        if (onSuccess) {
+            onSuccess();
+        }
     } catch (error) {
-        dispatch(lockCarCompleteActionCreator());
-        dispatch(lockCarErrorActionCreator(error));
+        dispatch(climatizationToggleCompleteActionCreator());
+        dispatch(climatizationErrorActionCreator(error));
+        if (onError) {
+            onError();
+        }
+    }
+}
+
+export const toggleCarClimatization = (onSuccess, onError) => async (dispatch, getStore) => {
+    const store = getStore();
+    const {isTurnedOn, error} = climatizationSelector(store);
+    dispatch(climatizationToggleStartActionCreator())
+    if (error) {
+        dispatch(unsetClimatizationErrorActionCreator());
+    }
+    if (isTurnedOn) {
+        dispatch(climatizationOff(onSuccess, onError));
+    }
+    else {
+        dispatch(climatizationOn(onSuccess, onError));
     }
 }

@@ -1,8 +1,9 @@
-import {ROTATE_LEFT, ROTATE_RIGHT, ROTATION_STOP} from "../actions";
+import {CHANGE_CAR_COLOR, ROTATE_LEFT, ROTATE_RIGHT, ROTATION_STOP} from "../actions";
 import {ROTATION_SPEED} from "../../constants";
 
 const initialState = {
     rotation: 0,
+    color: null,
 };
 
 const selectorsReducer = (state = initialState, action) => {
@@ -21,6 +22,11 @@ const selectorsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 rotation: 0
+            }
+        case CHANGE_CAR_COLOR:
+            return {
+                ...state,
+                color: action.payload,
             }
         default:
             return state;

@@ -11,19 +11,14 @@ import './styles.scss';
 import {
     gestureMoveDefineTimeout,
     raisedHand,
-    leftHandSwipeLeftPosition,
-    leftHandSwipeRightPosition,
-    rightHandSwipeLeftPosition,
-    rightHandSwipeRightPosition, swipeCenterPosition, swipeLeftPosition, swipeRightPosition
+    swipeCenterPosition,
+    swipeLeftPosition,
+    swipeRightPosition
 } from "../../constants";
 import {useDispatch} from "react-redux";
 import {rotateLeft, rotateRight, rotationStop} from "../../redux/actions";
 import {
-    leftHandSwipeLeftPositionGesture,
-    leftHandSwipeRightPositionGesture,
     raisedHandGesture,
-    rightHandSwipeLeftPositionGesture,
-    rightHandSwipeRightPositionGesture,
     swipeCenterPositionGesture, swipeLeftPositionGesture,
     swipeRightPositionGesture
 } from "../../gestureDescriptions";
@@ -158,8 +153,8 @@ export const GestureRecognition = () => {
                 }}
             />
         </div>, document.querySelector('.App'))}
-        <div className={cn('video-container', videoActive && 'video-container_active',
-            !loadedPoses && 'video-container_disabled')} onClick={loadedPoses ? toggleVideoActive : undefined}>
+        <div className={cn('video-button-container', videoActive && 'video-button-container',
+            !loadedPoses && 'video-button-container_disabled')} onClick={loadedPoses ? toggleVideoActive : undefined}>
             <FontAwesomeIcon color={'grey'} icon={videoActive ? faVideo : faVideoSlash} />
         </div>
     </>

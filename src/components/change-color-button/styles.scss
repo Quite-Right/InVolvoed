@@ -1,0 +1,5 @@
+@import "../../mixins/fixed-menu-button-container";
+
+.change-color-button {
+  @include fixed-menu-button-container;
+}

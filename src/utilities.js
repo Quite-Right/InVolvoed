@@ -76,7 +76,7 @@ export const drawHand = (predictions, ctx) => {
         ctx.beginPath();
         ctx.arc(x, y, style[i]["size"], 0, 3 * Math.PI);
 
-        // Set line color
+        // Set line change-color-button
         ctx.fillStyle = style[i]["color"];
         ctx.fill();
       }

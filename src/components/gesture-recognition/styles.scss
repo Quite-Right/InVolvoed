@@ -1,3 +1,5 @@
+@import "../../mixins/fixed-menu-button-container";
+
 .gesture-recognition-container {
   position: fixed;
   top: 0;
@@ -15,4 +17,14 @@
   zindex: 9;
   width: 640px;
   height: 480px;
+}
+
+.video-button-container {
+  @include fixed-menu-button-container;
+  &_active {
+
+  }
+  &_disabled {
+
+  }
 }
