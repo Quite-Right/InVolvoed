@@ -25,7 +25,7 @@ export default function Configurator() {
     const toggleConfiguratorOpened = () => {
         setConfiguratorOpened(isOpened => !isOpened);
     };
-    
+
     return (<>
         <div onClick={toggleConfiguratorOpened} className={cn('configurator-button')}>
             <FontAwesomeIcon color={disabledGrey} icon={faCogs} />
@@ -35,7 +35,7 @@ export default function Configurator() {
             {/*<div onClick={() => setConfiguratorOpened(false)}>*/}
             {/*    <FontAwesomeIcon icon={['far', 'far-window-close']} color={red} size={'2x'} swapOpacity/>*/}
             {/*</div>*/}
-            {Object.keys(configuratorActionsState).map(key =>
+            {Object.keys(configuratorActionsState).sort((key1, key2) => configuratorActionsState[key1].order - configuratorActionsState[key2].order).map(key =>
                 <div key={key} className={'configurator-toggle-container'}>
                     <div className={'configurator-toggle-label'}>{configuratorActionsState[key].label}</div>
                     <div className={'configurator-toggle'}>
