@@ -1,0 +1,10 @@
+.button-group {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  z-index: 20;
+  & svg{
+    width: 24px;
+    height: 24px;
+  }
+}

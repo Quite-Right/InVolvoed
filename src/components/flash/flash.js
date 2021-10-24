@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {flashSelector} from "../../redux/selectors";
 import {toggleCarLock} from "../../redux/actions";
 import {useAlert} from "react-alert";
+import {disabledGrey} from "../../constants";
 
 export default function Flash() {
     const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function Flash() {
         }
     };
     return (<div onClick={onClick} className={cn('flash-container')}>
-            <FontAwesomeIcon color={'grey'} icon={faLightbulb} />
+            <FontAwesomeIcon color={disabledGrey} icon={faLightbulb}  />
     </div>);
 }
 

@@ -1,0 +1,26 @@
+.arrow-container {
+  position: fixed;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(0, -50%);
+  &_left {
+    left: 0;
+  }
+  &_right {
+    right: 0;
+  }
+}
+
+.rotation-stop-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  &>svg {
+    width: 40px;
+    height: 40px;
+  }
+}

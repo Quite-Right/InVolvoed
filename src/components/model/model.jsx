@@ -3,9 +3,6 @@ import {useAnimations, useGLTF} from '@react-three/drei'
 import {useLoader} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from 'three';
-import {useSelector} from "react-redux";
-import {carColorSelector} from "../../redux/selectors";
-
 const MODEL_URL = './auto33.gltf';
 
 export default function Model({color}) {
@@ -22,13 +19,6 @@ export default function Model({color}) {
         if (color) {
             materials['MetallicBlue'].color = color;
         }
-
-        // применить материалы в зависимости от текущего материала
-        // const changeColor = (materialName)
-        //     for (const key in nodes) {
-        //         if (nodes[key].material?.name === 'MetallicBlue')
-        //             nodes[key].material = materials['MetallicRed']
-        //     }
     }, [color])
 
     // useEffect(() => {
@@ -74,8 +64,6 @@ export default function Model({color}) {
             })
         }
     }, [])
-
-
 
     // создание анимаций
     useEffect(() => {
