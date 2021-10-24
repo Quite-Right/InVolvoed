@@ -9,6 +9,7 @@ import Climatization from "../climatization/climatization";
 import Engine from "../engine/engine";
 import Honk from "../honk/honk";
 import Flash from "../flash/flash";
+import Configurator from "../configurator/configurator";
 
 export default function ButtonGroup() {
     const devices = useMediaDevices();
@@ -41,6 +42,7 @@ export default function ButtonGroup() {
 
     return (
         <div className="button-group">
+            <Configurator />
             {hasMic && <VoiceRecognition />}
             {hasVideo && <GestureRecognition />}
             <Engine />

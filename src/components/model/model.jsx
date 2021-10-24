@@ -3,9 +3,13 @@ import {useAnimations, useGLTF} from '@react-three/drei'
 import {useLoader} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from 'three';
+import {useDispatch} from "react-redux";
+import {AnimationActionCreator} from "../../utils";
+import {saveConfiguratorActionsState} from "../../redux/actions/configurator-actions";
+import {defineAnimationActionLabel} from "../../utils/define-animation-action-label";
 const MODEL_URL = './auto33.gltf';
 
-export default function Model({color}) {
+export default function Model({color, dispatch, actionsState}) {
     const  group = useRef();
     const gltf = useLoader(GLTFLoader, MODEL_URL);
     const {scene , materials, animations, nodes} = gltf;
@@ -14,8 +18,6 @@ export default function Model({color}) {
     const [carActions, setCarActions] = useState();
 
     useEffect(() => {
-        console.log(materials)
-        console.log(color)
         if (color) {
             materials['MetallicBlue'].color = color;
         }
@@ -54,7 +56,6 @@ export default function Model({color}) {
     // скрыть Mesh'ы, необходимые для смены материала
     useEffect(() => {
         if (nodes) {
-            console.log(nodes);
             const nodeNamesToHide = ['Sphere'];
             nodeNamesToHide.forEach(nodeNameToHide => {
                 const nodeToHide = nodes[nodeNameToHide];
@@ -67,7 +68,6 @@ export default function Model({color}) {
 
     // создание анимаций
     useEffect(() => {
-        console.log(clips)
         const newCarActions = {};
         clips.forEach((clip, index) => {
                 const clipClone = clip.clone();
@@ -77,39 +77,57 @@ export default function Model({color}) {
                     newAction.clampWhenFinished = true;
                     newAction.setLoop(THREE.LoopPingPong);
                     newAction.repetitions = 0;
-                    newCarActions[clip.name.replace('Open', 'Toggle')] = () => {
+                    newCarActions[clip.name.replace('Open', 'Toggle')] = new AnimationActionCreator(() => {
                         newAction.play();
                         newAction.paused = false ;
                         newAction.repetitions += 1 ;
-                    };
+                    });
                 }
-
-
         });
-        console.log(newCarActions);
         setCarActions(newCarActions);
+        // dispatch
     }, [])
 
-    // тест работы действий - потом заменить на выполнение действий
     useEffect(() => {
         if (carActions) {
-
-            setTimeout(() => {
-                // carActions['FrontLeftDoorToggle']();
-                // carActions['FrontLeftDoorWindowToggle']();
-                // carActions['BackLeftDoorWindowToggle']();
-                // carActions['TrunkToggle']();
-                // setTimeout(carActions['FrontRightDoorWindowToggle'], 2000)
-                // setTimeout(carActions['BackRightDoorToggle'], 2000)
-                // setTimeout(carActions['BackRightDoorWindowToggle'], 2000)
-                // setTimeout(carActions['TrunkToggle'], 2000)
-
-
-            }, 5000)
+            const newConfiguratorActionsState = {};
+            Object.keys(carActions).forEach(actionName => {
+                newConfiguratorActionsState[actionName] = {
+                    label: defineAnimationActionLabel(actionName),
+                    repetitions: 0
+                }
+            })
+            dispatch(saveConfiguratorActionsState(newConfiguratorActionsState))
         }
-    }, [carActions])
+    }, carActions)
 
-    console.log('model rerender');
+    useEffect(() => {
+        Object.keys(actionsState).forEach(action => {
+            if (carActions[action].repetitions % 2 !== actionsState[action].repetitions % 2) {
+                carActions[action].play();
+            }
+        })
+    }, [actionsState, carActions])
+
+    // тест работы действий - потом заменить на выполнение действий
+    // useEffect(() => {
+    //     if (carActions) {
+    //
+    //         setTimeout(() => {
+    //             carActions['FrontLeftDoorToggle'].play();
+    //             carActions['FrontLeftDoorWindowToggle'].play();
+    //             // carActions['BackLeftDoorWindowToggle']();
+    //             // carActions['TrunkToggle']();
+    //             // setTimeout(carActions['FrontRightDoorWindowToggle'], 2000)
+    //             // setTimeout(carActions['BackRightDoorToggle'], 2000)
+    //             // setTimeout(carActions['BackRightDoorWindowToggle'], 2000)
+    //             // setTimeout(carActions['TrunkToggle'], 2000)
+    //
+    //
+    //         }, 5000)
+    //     }
+    // }, [actionsState, carActions])
+
     return (
         <primitive object={gltf.scene} scale={1} ref={group} />
     );

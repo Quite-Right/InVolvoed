@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBullhorn} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
 import {honkSelector} from "../../redux/selectors";
-import {toggleCarLock} from "../../redux/actions";
+import {honk} from "../../redux/actions";
 import {useAlert} from "react-alert";
 
 export default function Honk() {
@@ -26,7 +26,7 @@ export default function Honk() {
                 alert.error(`При воспроизведении сигнала произошла ошибка`)
                 console.error(error);
             }
-            dispatch(toggleCarLock(onSuccess, onError));
+            dispatch(honk(onSuccess, onError));
         }
     };
     return (<div onClick={onClick} className={cn('honk-container')}>

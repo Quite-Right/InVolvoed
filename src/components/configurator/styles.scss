@@ -1,0 +1,49 @@
+@import "../../mixins/fixed-menu-button-container";
+
+.configurator-container {
+  padding: 16px 24px;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  right: 48px;
+  display: none;
+  background: #333333;
+  color: white;
+  &.configurator-container_opened {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.configurator-toggle {
+  position: relative;
+  &-container {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+  }
+  &-label {
+    text-align: left;
+    width: 250px;
+    margin-right: 8px;
+  }
+}
+
+.configurator-save-button {
+  padding: 8px 16px;
+  margin-top: 4px;
+  background: #1aaa1a;
+  border-radius: 3px;
+  width: 150px;
+  align-self: center;
+  cursor: pointer;
+  &:hover {
+    background: #24bf24;
+  }
+  &:active {
+    background: #1aaa1a;
+  }
+}
+
+.configurator-button {
+  @include fixed-menu-button-container;
+}
