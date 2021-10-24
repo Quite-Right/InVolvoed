@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React from "react";
 import "./styles.scss";
 import cn from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
