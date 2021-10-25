@@ -4,23 +4,25 @@ import cn from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLightbulb} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {flashSelector} from "../../redux/selectors";
+import {flashSelector, lanuageCodeSelector} from "../../redux/selectors";
 import {toggleCarLock} from "../../redux/actions";
 import {useAlert} from "react-alert";
 import {disabledGrey} from "../../constants";
+import {getDictionaryValue} from "../../utils/getDictionaryValue";
 
 export default function Flash() {
     const dispatch = useDispatch();
     const flashState = useSelector(flashSelector);
     const alert = useAlert();
     const {inProcess: disabled} = flashState;
+    const lang = useSelector(lanuageCodeSelector);
     const onClick = () => {
         if (!disabled) {
             const onSuccess = () => {
-                alert.success(`Сигнал успешно воспроизведен`);
+                alert.success(getDictionaryValue('configurator.alerts.car.FlashSuccess', lang));
             }
             const onError = (error) => {
-                alert.error(`При воспроизведении сигнала произошла ошибка`)
+                alert.error(getDictionaryValue('configurator.alerts.car.standardFailure', lang))
                 console.error(error);
             }
             dispatch(toggleCarLock(onSuccess, onError));

@@ -3,16 +3,19 @@ import cn from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCogs, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {configuratorActionsSelector} from "../../redux/selectors";
+import {configuratorActionsSelector, lanuageCodeSelector} from "../../redux/selectors";
 import Toggle from 'react-toggle';
 import {saveConfiguratorActionsState} from "../../redux/actions/configurator-actions";
 import {disabledGrey, red} from "../../constants";
 import "./styles.scss";
 import "react-toggle/style.css";
+import {getDictionaryValue} from "../../utils/getDictionaryValue";
+import Button from "../button/button";
 
 export default function Configurator() {
     const dispatch = useDispatch();
     const configuratorActionsReduxState = useSelector(configuratorActionsSelector);
+    const lang = useSelector(lanuageCodeSelector);
     const [configuratorOpened, setConfiguratorOpened] = useState(false);
     const [configuratorActionsState, setConfiguratorActionsState] = useState({});
 
@@ -32,7 +35,7 @@ export default function Configurator() {
             configuratorOpened && 'configurator-container_opened'])}>
             <div className={'configurator-container__header'}>
                 <div className={'configurator-container__title'}>
-                    Конфигуратор состояния машины
+                    {getDictionaryValue('configurator.Title', lang)}
                 </div>
                 <div className={'configurator-close-button'} onClick={() => setConfiguratorOpened(false)}>
                     <FontAwesomeIcon icon={faTimes} color={red} size={'2x'} swapOpacity/>
@@ -61,11 +64,11 @@ export default function Configurator() {
                         </div>
                     </div>
                 )}
-                <div className={'configurator-save-button'} onClick={() => {
+                <Button onClick={() => {
                     dispatch(saveConfiguratorActionsState(configuratorActionsState))
-                }}>
-                    Сохранить
-                </div>
+                }} className={'configurator-save-button'}>
+                    {getDictionaryValue('configurator.SaveButton', lang)}
+                </Button>
             </div>
 
         </div>

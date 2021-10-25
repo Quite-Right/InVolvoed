@@ -5,3 +5,4 @@ export * from './car-engine-actions';
 export * from './car-honk-actions';
 export * from './car-flash-actions';
 export * from './car-honk-and-flash-actions';
+export * from './language-actions';

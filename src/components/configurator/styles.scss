@@ -26,6 +26,8 @@
     flex-direction: column;
   }
   &__main {
+    display: flex;
+    flex-direction: column;
     padding: 8px 16px 16px;
   }
 }
@@ -44,19 +46,8 @@
 }
 
 .configurator-save-button {
-  padding: 8px 16px;
-  margin-top: 8px;
-  background: #1aaa1a;
-  border-radius: 7px;
-  width: 150px;
   align-self: center;
-  cursor: pointer;
-  &:hover {
-    background: #24bf24;
-  }
-  &:active {
-    background: #1aaa1a;
-  }
+  margin-top: 8px;
 }
 
 .configurator-close-button {

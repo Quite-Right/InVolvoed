@@ -8,9 +8,9 @@ import {AnimationActionCreator, defineAnimationActionOrder} from "../../utils";
 import {saveConfiguratorActionsState} from "../../redux/actions/configurator-actions";
 import {defineAnimationActionLabel} from "../../utils/define-animation-action-label";
 import {useInterval} from "react-use";
-const MODEL_URL = './auto33.gltf';
+const MODEL_URL = './auto35.gltf';
 
-export default function Model({color, dispatch, actionsState}) {
+export default function Model({color, dispatch, actionsState, lang}) {
     const  group = useRef();
     const gltf = useLoader(GLTFLoader, MODEL_URL);
     const {scene , materials, animations, nodes} = gltf;
@@ -20,8 +20,8 @@ export default function Model({color, dispatch, actionsState}) {
     const [wheelMaterialAnimationRedIncrease, setWheelMaterialAnimationRedIncrease] = useState(true);
     const [glassMaterialAnimationRedIncrease, setGlassMaterialAnimationRedIncrease] = useState(true);
 
-
     useEffect(() => {
+        console.log(materials)
         if (color) {
             materials['MetallicBlue'].color = color;
         }
