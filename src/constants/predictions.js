@@ -1,1 +1,1 @@
-export const PREDICTION_ACCURACY = 0.8
+export const PREDICTION_ACCURACY = 0.7

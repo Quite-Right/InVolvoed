@@ -1,19 +1,33 @@
 export const maintenanceCommand = [
-    'Volvo запиши на ТО',
-    'Volvo запишисись на техобслуживание',
 ]
 
 export const startCommand = [
-    'Volvo старт',
-    'Вольво старт',
+    'start',
+    'старт',
 ];
 
 export const stopCommand = [
-    'Volvo стоп',
-    'Вольво стоп',
+    'stop',
+    'стоп',
 ];
 
-export const defaultCommand = [
-    'Volvo',
-    'Вольво'
-]
+export const startRecognitionCommand = [
+    'hola',
+    'хола'
+];
+
+export const stopRecognitionCommand = [
+    'chow',
+    'сiao',
+    'чао'
+];
+
+export const openCommand = [
+    'open',
+    'открой'
+];
+
+export const closeCommand = [
+    'close',
+    'закрой'
+];

@@ -3,11 +3,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophoneAlt, faMicrophoneAltSlash } from '@fortawesome/free-solid-svg-icons'
 import cn from 'classnames';
 import stringSimilarity from 'string-similarity';
-import {defaultCommand, maintenanceCommand, startCommand, stopCommand, PREDICTION_ACCURACY} from "../../constants";
+import {
+    PREDICTION_ACCURACY,
+    startCommand,
+    stopCommand,
+   closeCommand, openCommand, stopRecognitionCommand, startRecognitionCommand
+} from "../../constants";
 import {defineDayTimeAppeal} from "../../utils/defineDayTime";
 import './styles.scss';
+import {useSelector} from "react-redux";
+import {lanuageCodeSelector} from "../../redux/selectors";
+import {getDictionaryValue} from "../../utils/getDictionaryValue";
 
 export const VoiceRecognition = () => {
+    const lang = useSelector(lanuageCodeSelector);
     const [recognizer, setRecognizer] = useState(null);
     const [micActive, setMicActive] = useState(false);
     const synth = window.speechSynthesis;
@@ -23,6 +32,10 @@ export const VoiceRecognition = () => {
     }
 
     const initializeRecognition = () => {
+        if (recognizer && micActive) {
+            recognizer.stop();
+            setMicActive(false);
+        }
         try {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             // Создаем распознаватель
@@ -30,54 +43,89 @@ export const VoiceRecognition = () => {
             // Ставим опцию, чтобы распознавание началось ещё до того, как пользователь закончит говорить
             recognizer.interimResults = true;
             // Какой язык будем распознавать?
-            recognizer.lang = 'ru-Ru';
+            recognizer.lang = lang === 'RU' ? 'ru-Ru' : 'en-US';
             // Чтобы продолжалось распознавание
             recognizer.continuous = true;
 
-            const recognizeComand = (event) => {
+            let timeout = null;
+
+            const recognizeCommand = (event) => {
                     const currentResult = event.results[event.resultIndex];
                     const result = currentResult.isFinal ? currentResult[0].transcript : null;
                     if (result) {
-                        const matches = stringSimilarity.findBestMatch(result, [
-                            ...maintenanceCommand,
+                        console.log(result)
+                        const matches = stringSimilarity.findBestMatch(result.toLowerCase(), [
                             ...startCommand,
                             ...stopCommand,
-                            ...defaultCommand,
+                            ...closeCommand,
+                            ...openCommand,
+                            ...stopRecognitionCommand,
                         ]);
                         const {bestMatch} = matches;
+                        console.log(matches)
                         if (bestMatch.rating > PREDICTION_ACCURACY) {
                             const resultMatchText = bestMatch.target;
 
-                            if (maintenanceCommand.includes(resultMatchText)) {
-                                const utterance = new SpeechSynthesisUtterance('Вы записаны на техобслуживание на 19:00 по адресу');
-                                synth.speak(utterance);
-                            } else if (startCommand.includes(resultMatchText)) {
-                                const utterance = new SpeechSynthesisUtterance('Машина запущена');
+                            if (startCommand.includes(resultMatchText)) {
+                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                    'voice.reactions.start', lang));
                                 synth.speak(utterance);
                             } else if (stopCommand.includes(resultMatchText)) {
-                                const utterance = new SpeechSynthesisUtterance('Машина остановлена');
+                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                    'voice.reactions.stop', lang));
+                                synth.speak(utterance);
+                            } else if (closeCommand.includes(resultMatchText)) {
+                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                    'voice.reactions.close', lang));
+                                synth.speak(utterance);
+                            } else if (openCommand.includes(resultMatchText)) {
+                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                    'voice.reactions.open', lang));
+                                synth.speak(utterance);
+                            } else if (stopRecognitionCommand.includes(resultMatchText)) {
+                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                    'voice.reactions.chao', lang));
                                 synth.speak(utterance);
                             }
+                            recognizer.onresult = recognizeHola;
+                            if (timeout)
+                                clearTimeout(timeout);
                         } else {
-                            const utterance = new SpeechSynthesisUtterance('Я не понял вашу команду, повторите еще раз');
+                            const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                'voice.reactions.noMatch', lang));
                             synth.speak(utterance);
+                            if (timeout) {
+                                clearTimeout(timeout);
+                                timeout = setTimeout(() => {
+                                    recognizer.onresult = recognizeHola;
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                        'voice.reactions.noMatch', lang));
+                                    synth.speak(utterance);
+                                }, 5000);
+                            }
                         }
-                        recognizer.onresult = recognizeVolvo;
                     }
             }
 
-            const recognizeVolvo = (event) => {
+            const recognizeHola = (event) => {
                 const currentResult = event.results[event.resultIndex];
                 const result = currentResult.isFinal ? currentResult[0].transcript : null;
-                if (result && (result.toLowerCase().includes('volvo') || result.toLowerCase().includes('Вольво'))) {
-                    // стартуем норм распознавание и говорим в ответ
-                    const utterance = new SpeechSynthesisUtterance(`${defineDayTimeAppeal()} чего бы вы хотели`);
-                    synth.speak(utterance);
-                    recognizer.onresult = recognizeComand;
+                if (result) {
+                    const matches = stringSimilarity.findBestMatch(result.toLowerCase(), [
+                        ...startRecognitionCommand,
+                    ]);
+                    const {bestMatch} = matches;
+                    if (bestMatch.rating > PREDICTION_ACCURACY) {
+                        // стартуем норм распознавание и говорим в ответ
+                        const utterance = new SpeechSynthesisUtterance(`${defineDayTimeAppeal(lang)} ${
+                            getDictionaryValue('voice.reactions.hola', lang)}`);
+                        synth.speak(utterance);
+                        recognizer.onresult = recognizeCommand;
+                    }
                 }
             }
 
-            recognizer.onresult = recognizeVolvo;
+            recognizer.onresult = recognizeHola;
             setRecognizer(recognizer);
         } catch (e) {
 
@@ -86,7 +134,7 @@ export const VoiceRecognition = () => {
     }
 
 
-   useEffect(initializeRecognition, []);
+   useEffect(initializeRecognition, [lang]);
 
     return window.webkitSpeechRecognition || window.SpeechRecognition ? <div onClick={toggleRecognition} className={cn('mic-container', micActive && 'mic-container_active')}>
         <FontAwesomeIcon color={'grey'} icon={micActive ? faMicrophoneAlt : faMicrophoneAltSlash} />

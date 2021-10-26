@@ -70,7 +70,7 @@ const dictionary = {
     },
     alerts: {
         car: {
-            ClosedSuccess: {
+            CloseSuccess: {
                 EN: 'Car closed',
                 RU: 'Машина закрыта',
             },
@@ -139,12 +139,44 @@ const dictionary = {
             //     EN: 'Open front left window',
             //     RU: 'Открыть переднее левое окно',
             // },
-            standardFailure: {
+            StandardFailure: {
                 EN: 'Error occurred',
                 RU: 'Произошла ошибка'
             }
         },
-    }
+    },
+    voice: {
+        reactions: {
+            start: {
+                EN: 'Engine started',
+                RU: 'Двигатель запущен',
+            },
+            stop: {
+                EN: 'Engine stopped',
+                RU: 'Двигатель выключен',
+            },
+            open: {
+                EN: 'Car opened',
+                RU: 'Машина открыта',
+            },
+            close: {
+                EN: 'Car closed',
+                RU: 'Машина закрыта',
+            },
+            hola: {
+                EN: 'how can I help you',
+                RU: 'Чем я могу вам помочь'
+            },
+            chao: {
+                EN: 'Chao',
+                RU: 'Чао'
+            },
+            noMatch: {
+                EN: 'I didn\'t understand your command could you repeat it please',
+                RU: 'Я не понял вашу команду не могли бы вы повторить ее'
+            }
+        }
+    },
 }
 
 export const getDictionaryValue = (path, lang = 'EN') => {

@@ -4,23 +4,26 @@ import cn from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThermometerEmpty, faThermometerFull} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {climatizationSelector} from "../../redux/selectors";
+import {climatizationSelector, lanuageCodeSelector} from "../../redux/selectors";
 import {toggleCarClimatization} from "../../redux/actions";
 import {useAlert} from "react-alert";
 import {disabledGrey, red} from "../../constants";
+import {getDictionaryValue} from "../../utils/getDictionaryValue";
 
 export default function Climatization() {
     const dispatch = useDispatch();
     const climatizationState = useSelector(climatizationSelector);
+    const lang = useSelector(lanuageCodeSelector);
     const alert = useAlert();
     const {isTurnedOn, inProcess: disabled} = climatizationState;
     const onClick = () => {
         if (!disabled) {
             const onSuccess = () => {
-                alert.success(`Климат контроль успешно ${isTurnedOn ? 'выключен' : 'включен'}`)
+                alert.error(getDictionaryValue(isTurnedOn ? 'configurator.alerts.car.ClimatizationOffSuccess' :
+                    'configurator.alerts.car.ClimatizationOnSuccess', lang))
             }
             const onError = (error) => {
-                alert.error(`При ${isTurnedOn ? 'выключении' : 'включении'} климат контроля произошла ошибка`)
+                alert.error(getDictionaryValue('configurator.alerts.car.StandardFailure', lang))
                 console.error(error);
             }
             dispatch(toggleCarClimatization(onSuccess, onError));

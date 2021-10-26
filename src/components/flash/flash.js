@@ -22,7 +22,7 @@ export default function Flash() {
                 alert.success(getDictionaryValue('configurator.alerts.car.FlashSuccess', lang));
             }
             const onError = (error) => {
-                alert.error(getDictionaryValue('configurator.alerts.car.standardFailure', lang))
+                alert.error(getDictionaryValue('configurator.alerts.car.StandardFailure', lang))
                 console.error(error);
             }
             dispatch(toggleCarLock(onSuccess, onError));

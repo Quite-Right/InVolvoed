@@ -25,7 +25,7 @@ export default function Honk() {
                 audio.play();
             }
             const onError = (error) => {
-                alert.error(getDictionaryValue('configurator.alerts.car.standardFailure', lang))
+                alert.error(getDictionaryValue('configurator.alerts.car.StandardFailure', lang))
                 console.error(error);
             }
             dispatch(honk(onSuccess, onError));
