@@ -151,4 +151,4 @@ export default function Model({color, dispatch, actionsState, lang}) {
     );
 }
 
-useGLTF.preload('/auto3.gltf')
+useGLTF.preload(MODEL_URL)
