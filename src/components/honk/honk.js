@@ -21,11 +21,11 @@ export default function Honk() {
     const onClick = () => {
         if (!disabled) {
             const onSuccess = () => {
-                alert.success(getDictionaryValue('configurator.alerts.car.HonkSuccess', lang));
+                alert.success(getDictionaryValue('alerts.car.HonkSuccess', lang));
                 audio.play();
             }
             const onError = (error) => {
-                alert.error(getDictionaryValue('configurator.alerts.car.StandardFailure', lang))
+                alert.error(getDictionaryValue('alerts.car.StandardFailure', lang))
                 console.error(error);
             }
             dispatch(honk(onSuccess, onError));

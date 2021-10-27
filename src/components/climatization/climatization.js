@@ -19,11 +19,11 @@ export default function Climatization() {
     const onClick = () => {
         if (!disabled) {
             const onSuccess = () => {
-                alert.error(getDictionaryValue(isTurnedOn ? 'configurator.alerts.car.ClimatizationOffSuccess' :
-                    'configurator.alerts.car.ClimatizationOnSuccess', lang))
+                alert.success(getDictionaryValue(isTurnedOn ? 'alerts.car.ClimatizationOffSuccess' :
+                    'alerts.car.ClimatizationOnSuccess', lang))
             }
             const onError = (error) => {
-                alert.error(getDictionaryValue('configurator.alerts.car.StandardFailure', lang))
+                alert.error(getDictionaryValue('alerts.car.StandardFailure', lang))
                 console.error(error);
             }
             dispatch(toggleCarClimatization(onSuccess, onError));

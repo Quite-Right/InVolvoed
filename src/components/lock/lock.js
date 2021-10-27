@@ -18,11 +18,11 @@ export default function Lock() {
     const onClick = () => {
         if (!disabled) {
             const onSuccess = () => {
-                alert.success(getDictionaryValue(isLocked ?  'configurator.alerts.car.OpenSuccess'  :
-                    'configurator.alerts.car.CloseSuccess', lang));
+                alert.success(getDictionaryValue(isLocked ?  'alerts.car.OpenSuccess'  :
+                    'alerts.car.CloseSuccess', lang));
             }
             const onError = (error) => {
-                alert.error(getDictionaryValue('configurator.alerts.car.StandardFailure', lang))
+                alert.error(getDictionaryValue('alerts.car.StandardFailure', lang))
 
                 console.error(error);
             }

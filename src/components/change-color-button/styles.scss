@@ -3,3 +3,9 @@
 .change-color-button {
   @include fixed-menu-button-container;
 }
+
+.change-color__sketch-picker {
+  position: absolute;
+  top: 0;
+  right: 52px;
+}

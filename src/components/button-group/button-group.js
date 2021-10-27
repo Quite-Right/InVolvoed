@@ -10,6 +10,7 @@ import Engine from "../engine/engine";
 import Honk from "../honk/honk";
 import Flash from "../flash/flash";
 import Configurator from "../configurator/configurator";
+import LanguageButton from "../language-button/language-button";
 
 export default function ButtonGroup() {
     const devices = useMediaDevices();
@@ -50,15 +51,11 @@ export default function ButtonGroup() {
             <Climatization />
             <Honk />
             <Flash />
+            <LanguageButton />
             <ChangeColorButton color={{
                 b: 0.0029885650146752596,
                 g: 0.0006998085300438106,
                 r: 0.12370066344738007,
-            }}/>
-            <ChangeColorButton color={{
-                b: 0.13285456597805023,
-                g: 0.0010034418664872646,
-                r: 0,
             }}/>
         </div>
     );

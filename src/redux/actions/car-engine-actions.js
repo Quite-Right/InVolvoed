@@ -28,7 +28,7 @@ export const engineErrorActionCreator = (error) => ({
     payload: error,
 })
 
-export const unsetClimatizationErrorActionCreator = () => ({
+export const unsetEngineErrorActionCreator = () => ({
     type: UNSET_ENGINE_ERROR,
 })
 
@@ -80,7 +80,7 @@ export const toggleCarEngine = (onSuccess, onError) => async (dispatch, getStore
     const {error, isTurnedOn} = engineSelector(store);
     dispatch(engineToggleStartActionCreator())
     if (error) {
-        dispatch(unsetClimatizationErrorActionCreator());
+        dispatch(unsetEngineErrorActionCreator());
     }
     if (isTurnedOn) {
         dispatch(engineOff(onSuccess, onError));

@@ -1,0 +1,6 @@
+@import "../../mixins/fixed-menu-button-container";
+
+.language-button {
+  @include fixed-menu-button-container;
+  color: gray;
+}

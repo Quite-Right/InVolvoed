@@ -3,7 +3,11 @@ import {ROTATION_SPEED} from "../../constants";
 
 const initialState = {
     rotation: 0,
-    color: null,
+    color: {
+        b: 0.0029885650146752596,
+        g: 0.0006998085300438106,
+        r: 0.12370066344738007,
+    },
 };
 
 const selectorsReducer = (state = initialState, action) => {

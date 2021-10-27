@@ -11,15 +11,20 @@ import {
 } from "../../constants";
 import {defineDayTimeAppeal} from "../../utils/defineDayTime";
 import './styles.scss';
-import {useSelector} from "react-redux";
-import {lanuageCodeSelector} from "../../redux/selectors";
+import {useDispatch, useSelector} from "react-redux";
+import {lanuageCodeSelector, lockSelector} from "../../redux/selectors";
 import {getDictionaryValue} from "../../utils/getDictionaryValue";
+import {engineOff, engineOn, lockCar, unlockCar} from "../../redux/actions";
 
 export const VoiceRecognition = () => {
     const lang = useSelector(lanuageCodeSelector);
     const [recognizer, setRecognizer] = useState(null);
     const [micActive, setMicActive] = useState(false);
     const synth = window.speechSynthesis;
+    const dispatch = useDispatch();
+    const lockState = useSelector(lockSelector);
+    const {isLocked, inProcess: disabled} = lockState;
+
 
     const toggleRecognition = () => {
         if (micActive && recognizer) {
@@ -67,21 +72,55 @@ export const VoiceRecognition = () => {
                             const resultMatchText = bestMatch.target;
 
                             if (startCommand.includes(resultMatchText)) {
-                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
-                                    'voice.reactions.start', lang));
-                                synth.speak(utterance);
+                                const onSuccess = () => {
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                        'voice.reactions.start', lang));
+                                    synth.speak(utterance);
+                                }
+                                const onError = (error) => {
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue('alerts.car.StandardFailure', lang))
+                                    console.log(error)
+                                    synth.speak(utterance);
+                                }
+                                dispatch(engineOn(onSuccess, onError));
                             } else if (stopCommand.includes(resultMatchText)) {
-                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
-                                    'voice.reactions.stop', lang));
-                                synth.speak(utterance);
+                                const onSuccess = () => {
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                        'voice.reactions.stop', lang));
+                                    synth.speak(utterance);
+                                }
+                                const onError = (error) => {
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue('alerts.car.StandardFailure', lang))
+                                    console.log(error)
+                                    synth.speak(utterance);
+                                }
+                                dispatch(engineOff(onSuccess, onError));
                             } else if (closeCommand.includes(resultMatchText)) {
-                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
-                                    'voice.reactions.close', lang));
-                                synth.speak(utterance);
+                                const onSuccess = () => {
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                        'voice.reactions.close', lang));
+                                    synth.speak(utterance);
+                                }
+                                const onError = (error) => {
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue('alerts.car.StandardFailure', lang))
+                                    console.log(error)
+                                    synth.speak(utterance);
+                                }
+                                dispatch(lockCar(onSuccess, onError));
+
                             } else if (openCommand.includes(resultMatchText)) {
-                                const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
-                                    'voice.reactions.open', lang));
-                                synth.speak(utterance);
+                                const onSuccess = () => {
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
+                                        'voice.reactions.open', lang));
+                                    synth.speak(utterance);
+                                }
+                                const onError = (error) => {
+                                    const utterance = new SpeechSynthesisUtterance(getDictionaryValue('alerts.car.StandardFailure', lang))
+                                    console.log(error)
+                                    synth.speak(utterance);
+                                }
+                                dispatch(unlockCar(onSuccess, onError));
+
                             } else if (stopRecognitionCommand.includes(resultMatchText)) {
                                 const utterance = new SpeechSynthesisUtterance(getDictionaryValue(
                                     'voice.reactions.chao', lang));

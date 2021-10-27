@@ -19,10 +19,10 @@ export default function Flash() {
     const onClick = () => {
         if (!disabled) {
             const onSuccess = () => {
-                alert.success(getDictionaryValue('configurator.alerts.car.FlashSuccess', lang));
+                alert.success(getDictionaryValue('alerts.car.FlashSuccess', lang));
             }
             const onError = (error) => {
-                alert.error(getDictionaryValue('configurator.alerts.car.StandardFailure', lang))
+                alert.error(getDictionaryValue('alerts.car.StandardFailure', lang))
                 console.error(error);
             }
             dispatch(toggleCarLock(onSuccess, onError));

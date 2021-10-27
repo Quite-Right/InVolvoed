@@ -19,11 +19,11 @@ export default function Engine() {
     const onClick = () => {
         if (!disabled) {
             const onSuccess = () => {
-                alert.error(getDictionaryValue(isTurnedOn ? 'configurator.alerts.car.StopSuccess' :
-                    'configurator.alerts.car.StartSuccess', lang))
+                alert.success(getDictionaryValue(isTurnedOn ? 'alerts.car.StopSuccess' :
+                    'alerts.car.StartSuccess', lang))
             }
             const onError = (error) => {
-                alert.error(getDictionaryValue('configurator.alerts.car.StandardFailure', lang))
+                alert.error(getDictionaryValue('alerts.car.StandardFailure', lang))
                 console.error(error);
             }
             dispatch(toggleCarEngine(onSuccess, onError));
