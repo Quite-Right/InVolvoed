@@ -4,9 +4,9 @@ import {ROTATION_SPEED} from "../../constants";
 const initialState = {
     rotation: 0,
     color: {
-        b: 0.0029885650146752596,
-        g: 0.0006998085300438106,
-        r: 0.12370066344738007,
+        b: 0.13285456597805023,
+        g: 0.0010034418664872646,
+        r: 0,
     },
 };
 

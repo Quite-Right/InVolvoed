@@ -24,3 +24,22 @@
     height: 40px;
   }
 }
+
+@media (max-height: 1060px) {
+  .rotation-stop-container {
+    top: 540px;
+  }
+  .arrow-container {
+    top: 540px;
+  }
+}
+
+@media (max-height: 560px) {
+  .rotation-stop-container {
+    top: 300px;
+  }
+  .arrow-container {
+    top: 300px;
+  }
+}
+

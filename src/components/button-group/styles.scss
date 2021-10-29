@@ -3,8 +3,18 @@
   top: 20px;
   right: 10px;
   z-index: 20;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   & svg{
     width: 24px;
     height: 24px;
+  }
+}
+
+@media (max-height: 560px) {
+  .button-group {
+    height: 280px;
+    right: 60px;
   }
 }

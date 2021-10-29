@@ -64,13 +64,12 @@ export default function Configurator() {
                         </div>
                     </div>
                 )}
-                <Button onClick={() => {
-                    dispatch(saveConfiguratorActionsState(configuratorActionsState))
-                }} className={'configurator-save-button'}>
-                    {getDictionaryValue('configurator.SaveButton', lang)}
-                </Button>
             </div>
-
+            <Button onClick={() => {
+                dispatch(saveConfiguratorActionsState(configuratorActionsState))
+            }} className={'configurator-save-button'}>
+                {getDictionaryValue('configurator.SaveButton', lang)}
+            </Button>
         </div>
     </>);
 }

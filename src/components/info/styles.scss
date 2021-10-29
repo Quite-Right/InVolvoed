@@ -1,0 +1,20 @@
+@import "../../mixins/fixed-menu-button-container";
+
+.info-button {
+  @include fixed-menu-button-container;
+}
+
+.info-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  background: #333333;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  &_active {
+    display: flex;
+    display: none;
+  }
+}

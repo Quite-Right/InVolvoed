@@ -11,6 +11,7 @@ import Honk from "../honk/honk";
 import Flash from "../flash/flash";
 import Configurator from "../configurator/configurator";
 import LanguageButton from "../language-button/language-button";
+import Info from "../info/info";
 
 export default function ButtonGroup() {
     const devices = useMediaDevices();
@@ -43,6 +44,7 @@ export default function ButtonGroup() {
 
     return (
         <div className="button-group">
+            <Info />
             <Configurator />
             {hasMic && <VoiceRecognition />}
             {hasVideo && <GestureRecognition />}
@@ -52,11 +54,7 @@ export default function ButtonGroup() {
             <Honk />
             <Flash />
             <LanguageButton />
-            <ChangeColorButton color={{
-                b: 0.0029885650146752596,
-                g: 0.0006998085300438106,
-                r: 0.12370066344738007,
-            }}/>
+            <ChangeColorButton />
         </div>
     );
 }

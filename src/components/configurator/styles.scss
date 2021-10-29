@@ -8,6 +8,7 @@
   display: none;
   background: #333333;
   color: white;
+  max-width: calc(100vw - 72px);
   &__header {
     display: flex;
     justify-content: space-between;
@@ -27,7 +28,23 @@
   &__main {
     display: flex;
     flex-direction: column;
-    padding: 8px 16px 16px;
+    padding: 8px 16px 0px;
+    max-height: calc(100vh - 145px);
+    overflow: auto;
+    /* width */
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: white;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: grey;
+    }
   }
 }
 .configurator-toggle {
@@ -35,6 +52,7 @@
   &-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin: 4px 0;
   }
   &-label {
@@ -45,8 +63,9 @@
 }
 
 .configurator-save-button {
-  align-self: center;
   margin-top: 8px;
+  align-self: center;
+  margin-bottom: 16px;
 }
 
 .configurator-close-button {
