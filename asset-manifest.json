@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/volvo/static/css/main.c8ed1b06.chunk.css",
+    "main.css": "/volvo/static/css/main.d6923ceb.chunk.css",
     "main.js": "/volvo/static/js/main.3fc721bb.chunk.js",
     "main.js.map": "/volvo/static/js/main.3fc721bb.chunk.js.map",
     "runtime-main.js": "/volvo/static/js/runtime-main.a00e05fe.js",
@@ -10,14 +10,14 @@
     "static/js/2.75f43bdb.chunk.js.map": "/volvo/static/js/2.75f43bdb.chunk.js.map",
     "index.html": "/volvo/index.html",
     "static/css/2.65aefc5a.chunk.css.map": "/volvo/static/css/2.65aefc5a.chunk.css.map",
-    "static/css/main.c8ed1b06.chunk.css.map": "/volvo/static/css/main.c8ed1b06.chunk.css.map",
+    "static/css/main.d6923ceb.chunk.css.map": "/volvo/static/css/main.d6923ceb.chunk.css.map",
     "static/js/2.75f43bdb.chunk.js.LICENSE.txt": "/volvo/static/js/2.75f43bdb.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a00e05fe.js",
     "static/css/2.65aefc5a.chunk.css",
     "static/js/2.75f43bdb.chunk.js",
-    "static/css/main.c8ed1b06.chunk.css",
+    "static/css/main.d6923ceb.chunk.css",
     "static/js/main.3fc721bb.chunk.js"
   ]
 }
