@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {climatizationSelector, lanuageCodeSelector} from "../../redux/selectors";
 import {toggleCarClimatization} from "../../redux/actions";
 import {useAlert} from "react-alert";
-import {disabledGrey, red} from "../../constants";
+import {disabledGray, red} from "../../constants";
 import {getDictionaryValue} from "../../utils/getDictionaryValue";
 
 export default function Climatization() {
@@ -31,7 +31,7 @@ export default function Climatization() {
     };
     return (<div onClick={onClick} className={cn('climatization-container')}>
             <FontAwesomeIcon
-                color={isTurnedOn ? red : disabledGrey}
+                color={isTurnedOn ? red : disabledGray}
                 icon={isTurnedOn ? faThermometerFull : faThermometerEmpty}
             />
     </div>);

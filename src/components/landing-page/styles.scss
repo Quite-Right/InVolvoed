@@ -36,6 +36,7 @@
     height: 100vh;
     position: fixed;
     overflow-y: scroll;
+    overflow-x: hidden;
     top: 0;
     left: 0;
     z-index: 30;
@@ -58,9 +59,14 @@
       background: #373737;
     }
     >* {
+      position: relative;
       max-width: 1140px;
       margin: 0 10%;
       width: 90%;
+      &>* {
+        z-index: 2;
+        position: relative;
+      }
     }
   }
   &-text {
@@ -87,7 +93,7 @@
     color: #FFFFFF;
     &>a {
       text-decoration: none;
-      color: #FFFFFF;
+      color: #00C4F0;
     }
   }
   &-button {
@@ -113,12 +119,19 @@
       cursor: pointer;
     }
   }
+  &-language-button {
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    z-index: 20;
+  }
   &-nav {
     display: flex;
     justify-content: space-around;
     margin: 45px auto;
     width: 100%;
     &-element {
+      margin: 4px;
       &>a {
         text-decoration: none;
         color: #ffffff;
@@ -165,17 +178,6 @@
       left: 0;
     }
   }
-  &-main {
-
-  }
-  &-section {
-    &-header {
-
-    }
-    &-text {
-
-    }
-  }
 
   &-task {
     padding: 80px 8px;
@@ -185,6 +187,7 @@
     }
     &-image {
       max-width: 100%;
+      object-fit: cover;
     }
     .landing-text {
       margin-top: 16px;
@@ -241,6 +244,12 @@
     .landing-header {
       margin-bottom: 20px;
     }
+    .landing-text {
+      max-width: 800px;
+      &.landing-voice-ul-title {
+        margin: 40px 0 16px;
+      }
+    }
     &-commands-container {
       display: flex;
       flex-wrap: wrap;
@@ -249,7 +258,7 @@
     }
     &-command {
       display: flex;
-      width: 280px;
+      width: 360px;
       margin: 1px 32px 1px 0;
       &:nth-of-type(2n) {
         margin-right: 0;
@@ -272,12 +281,7 @@
         align-items: center;
       }
     }
-    & .landing-text {
-      max-width: 800px;
-      &:nth-of-type(4) {
-        margin: 32px 0 16px;
-      }
-    }
+
   }
 
   &-gesture {
@@ -323,6 +327,7 @@
   }
 
   &-contact {
+    margin: 4px;
     &-role {
       font-weight: bold;
       margin-bottom: 8px;
@@ -332,7 +337,7 @@
     }
     &-email {
       text-decoration: none;
-      color: #ffffff;
+      color: #00C4F0;
     }
   }
 }
@@ -367,6 +372,12 @@
         width: 90%;
         margin-right: 0;
       }
+    }
+    &-contacts-container {
+      flex-direction: column;
+    }
+    &-contact {
+      margin: 8px 0;
     }
   }
 }

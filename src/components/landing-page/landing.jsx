@@ -1,13 +1,19 @@
 import React from "react";
 import styles from "./styles.scss";
 import cn from "classnames";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {lanuageCodeSelector} from "../../redux/selectors";
 import {dictionary} from "../../constants";
 import {getDictionaryValue} from "../../utils/getDictionaryValue";
+import BackgroundFigure from "../backgroud-figure/background-figure";
+import {setLanuageActionCreator} from "../../redux/actions";
 
 export default function LandingPage({isOpened, close}) {
     const lang = useSelector(lanuageCodeSelector);
+    const dispatch = useDispatch();
+    const onLanguageClick = () => {
+        dispatch(setLanuageActionCreator(lang === 'RU' ? 'EN' : 'RU'));
+    };
 
     const cards = [
         <svg width="98" height="98" viewBox="0 0 98 98" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -274,6 +280,9 @@ export default function LandingPage({isOpened, close}) {
     ]
 
     return (<div className={cn(['landing-page', isOpened && 'landing-page_opened'])}>
+        <div className={'landing-button landing-language-button'} onClick={onLanguageClick}>
+            {lang}
+        </div>
         <div className={'landing-block'}>
             <ul className={'landing-nav'}>
                 {
@@ -285,9 +294,10 @@ export default function LandingPage({isOpened, close}) {
                 }
             </ul>
         </div>
-
         <div className={'landing-block'}  id={'about-hack'}>
             <div className={'landing-about'}>
+                <BackgroundFigure type={'circle'} position={{right: -160, top: -80}} blur />
+                <BackgroundFigure type={'triangle'} position={{left: -200, top: 350}} blur />
                 <div className={'landing-about-description'}>
                     <div className={['landing-header']} dangerouslySetInnerHTML={{
                         __html: getDictionaryValue(`landingPage.about-hack.text.title`, lang)
@@ -301,6 +311,7 @@ export default function LandingPage({isOpened, close}) {
                 </div>
                 <div className={'square'}>
                     <div className={'landing-about-preview'}>
+                        <video src="InVolvedPreviewVideo.mp4" width="100%" loop autoPlay autoBuffer muted controls/>
                         <div className={'landing-about-note'}>
                             {getDictionaryValue(`landingPage.about-hack.text.note`, lang)}
                         </div>
@@ -310,6 +321,12 @@ export default function LandingPage({isOpened, close}) {
         </div>
         <div className={cn(['landing-block', 'landing-block_light'])} id={'task'}>
             <div className={'landing-task'} >
+                <BackgroundFigure type={'circle'} position={{left: 1050, top: 487}} blur />
+                <BackgroundFigure type={'triangle'} position={{left: 1020, top: 192}} blur />
+                <BackgroundFigure type={'square'} position={{left: 1262, top: 371}} blur />
+                <BackgroundFigure type={'circle'} position={{left: 563, top: 223}} />
+                <BackgroundFigure type={'triangle'} position={{left: 755, top: 374}} />
+                <BackgroundFigure type={'square'} position={{left: 802, top: 105}} />
                 <div className={['landing-header']} dangerouslySetInnerHTML={{
                     __html: getDictionaryValue(`landingPage.task.text.title`, lang)
                 }} />
@@ -317,12 +334,14 @@ export default function LandingPage({isOpened, close}) {
                     __html: getDictionaryValue(`landingPage.task.text.description`, lang)
                 }} />
                 <div className={'rectangular'}>
-                    <img className={'landing-task-image'} src={'https://images.unsplash.com/photo-1638111963063-9dc8f1afa9b9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'}/>
+                    <img className={'landing-task-image'} src={'preview.png'}/>
                 </div>
             </div>
         </div>
         <div className={cn(['landing-block', 'landing-block_light'])} id={'solution'}>
             <div className={'landing-solution'} >
+                <BackgroundFigure type={'circle'} position={{left: 330, top: 160}} blur />
+                <BackgroundFigure type={'square'} position={{left: 854, top: 600}} blur />
                 <div className={['landing-header']} dangerouslySetInnerHTML={{
                     __html: getDictionaryValue(`landingPage.solution.text.title`, lang)
                 }} />
@@ -343,16 +362,19 @@ export default function LandingPage({isOpened, close}) {
         </div>
         <div className={'landing-block'} id={'voice'}>
             <div className={'landing-voice'} >
-                <div className={['landing-header']} dangerouslySetInnerHTML={{
+                <BackgroundFigure type={'circle'} position={{left: -40, top: 10}} blur />
+                <BackgroundFigure type={'triangle'} position={{left: 1020, top: 420}} blur />
+                <BackgroundFigure type={'square'} position={{left: 800, top: 200}} blur />
+                <div className={'landing-header'} dangerouslySetInnerHTML={{
                     __html: getDictionaryValue(`landingPage.voice.title`, lang)
                 }} />
-                <div className={['landing-text']} dangerouslySetInnerHTML={{
+                <div className={'landing-text'} dangerouslySetInnerHTML={{
                     __html: getDictionaryValue(`landingPage.voice.text.description[0]`, lang)
                 }} />
-                <div className={['landing-text']} dangerouslySetInnerHTML={{
+                <div className={'landing-text'} dangerouslySetInnerHTML={{
                     __html: getDictionaryValue(`landingPage.voice.text.description[1]`, lang)
                 }} />
-                <div className={['landing-text']} dangerouslySetInnerHTML={{
+                <div className={cn(['landing-text', 'landing-voice-ul-title'])} dangerouslySetInnerHTML={{
                     __html: getDictionaryValue(`landingPage.voice.text.description[2]`, lang)
                 }} />
                 <div className={'landing-voice-commands-container'}>
@@ -379,6 +401,7 @@ export default function LandingPage({isOpened, close}) {
         </div>
         <div className={'landing-block'} id={'gestures'}>
             <div className={'landing-gestures'} >
+                <BackgroundFigure type={'circle'} position={{left: 950, top: 40}} blur />
                 <div className={['landing-header']} dangerouslySetInnerHTML={{
                     __html: getDictionaryValue(`landingPage.gestures.title`, lang)
                 }} />
@@ -419,7 +442,6 @@ export default function LandingPage({isOpened, close}) {
                         </a>
                     </div>)}
                 </div>
-
             </div>
         </div>
     </div>)

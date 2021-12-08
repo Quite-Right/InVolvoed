@@ -1,0 +1,8 @@
+.background-figure {
+  position: absolute;
+  z-index: 1;
+  max-width: 0;
+  &_blur {
+    filter: blur(12px);
+  }
+}

@@ -6,7 +6,7 @@ import {rotateLeft, rotateRight, rotationStop} from "../../redux/actions";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronLeft, faChevronRight, faPause} from "@fortawesome/free-solid-svg-icons";
 import './styles.scss';
-import {disabledGrey} from "../../constants";
+import {disabledGray} from "../../constants";
 
 
 const SceneControls = () => {
@@ -18,17 +18,17 @@ const SceneControls = () => {
             <div className={cn('arrow-container', 'arrow-container_left')} onClick={() => {
                 dispatch(rotateLeft())
             }}>
-                <FontAwesomeIcon color={disabledGrey} icon={faChevronLeft} size={'2x'}/>
+                <FontAwesomeIcon color={disabledGray} icon={faChevronLeft} size={'2x'}/>
             </div>
             <div className={cn('arrow-container', 'arrow-container_right')} onClick={() => {
                 dispatch(rotateRight())
             }}>
-                <FontAwesomeIcon color={disabledGrey} icon={faChevronRight} size={'2x'}/>
+                <FontAwesomeIcon color={disabledGray} icon={faChevronRight} size={'2x'}/>
             </div>
             {rotation !== 0 && <div onClick={() => {
                 dispatch(rotationStop());
             }} className={cn('rotation-stop-container')}>
-                <FontAwesomeIcon color={disabledGrey} icon={faPause} size={'2x'}/>
+                <FontAwesomeIcon color={disabledGray} icon={faPause} size={'2x'}/>
             </div>}
        </>
     );

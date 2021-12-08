@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {engineSelector, lanuageCodeSelector} from "../../redux/selectors";
 import {toggleCarEngine} from "../../redux/actions";
 import {useAlert} from "react-alert";
-import {green, disabledGrey} from "../../constants";
+import {green, disabledGray} from "../../constants";
 import {getDictionaryValue} from "../../utils/getDictionaryValue";
 
 export default function Engine() {
@@ -30,7 +30,7 @@ export default function Engine() {
         }
     };
     return (<div onClick={onClick} className={cn('engine-container')}>
-        <FontAwesomeIcon color={isTurnedOn ? green : disabledGrey} icon={faKey} />
+        <FontAwesomeIcon color={isTurnedOn ? green : disabledGray} icon={faKey} />
     </div>);
 }
 

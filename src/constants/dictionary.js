@@ -398,8 +398,8 @@ export const dictionary = {
                         RU: 'Вибе Александр',
                     },
                     email: {
-                        EN: 'novogrudskiy.dv@gmail.com',
-                        RU: 'novogrudskiy.dv@gmail.com',
+                        EN: 'Zexeto2@gmail.com',
+                        RU: 'Zexeto2@gmail.com',
                     },
                 },
                 {

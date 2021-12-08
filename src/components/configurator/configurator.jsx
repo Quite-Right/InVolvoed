@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {configuratorActionsSelector, lanuageCodeSelector} from "../../redux/selectors";
 import Toggle from 'react-toggle';
 import {saveConfiguratorActionsState} from "../../redux/actions/configurator-actions";
-import {disabledGrey, red} from "../../constants";
+import {disabledGray, red} from "../../constants";
 import "./styles.scss";
 import "react-toggle/style.css";
 import {getDictionaryValue} from "../../utils/getDictionaryValue";
@@ -29,7 +29,7 @@ export default function Configurator() {
 
     return (<>
         <div onClick={toggleConfiguratorOpened} className={cn('configurator-button')}>
-            <FontAwesomeIcon color={disabledGrey} icon={faCogs} />
+            <FontAwesomeIcon color={disabledGray} icon={faCogs} />
         </div>
         <div className={cn(['configurator-container',
             configuratorOpened && 'configurator-container_opened'])}>
