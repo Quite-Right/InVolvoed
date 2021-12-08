@@ -1,0 +1,447 @@
+@import "../../mixins/fixed-menu-button-container";
+
+.square {
+  width: 100%;
+  position: relative;
+  &>* {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+.square:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.rectangular {
+  width: 100%;
+  position: relative;
+  &>* {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+.rectangular:after {
+  content: "";
+  display: block;
+  padding-bottom: 50%;
+}
+
+.landing {
+  &-page {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    display: none;
+    color: #ffffff;
+    font-family: Montserrat;
+    &_opened {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  &-block {
+    width: 100%;
+    background: #292929;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &_light {
+      background: #373737;
+    }
+    >* {
+      max-width: 1140px;
+      margin: 0 10%;
+      width: 90%;
+    }
+  }
+  &-text {
+    white-space: pre-wrap;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    word-wrap: break-word;
+    color: #FFFFFF;
+    &>a {
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+  }
+  &-header {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 23px;
+    line-height: 28px;
+
+    color: #FFFFFF;
+    &>a {
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+  }
+  &-button {
+    padding: 12px 16px;
+    background: #00C4F0;
+    box-shadow: 0px 2px 13px rgba(0, 196, 240, 0.67);
+    border-radius: 6px;
+    border: none;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+    &:hover {
+      background: #FFFFFF;
+      box-shadow: 0px 2px 13px rgba(255, 255, 255, 0.67);
+      cursor: pointer;
+    }
+  }
+  &-nav {
+    display: flex;
+    justify-content: space-around;
+    margin: 45px auto;
+    width: 100%;
+    &-element {
+      &>a {
+        text-decoration: none;
+        color: #ffffff;
+        &:hover {
+          color: #00C4F0;
+          cursor: pointer;
+        }
+      }
+      //margin: auto;
+      display: block;
+
+    }
+  }
+  &-about {
+    padding: 120px 8px 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    .square {
+      width: 340px;
+    }
+
+    &-preview {
+      border: 12px solid rgba(0, 196, 240, 0.52);
+      padding: 12px;
+    }
+    &-description {
+      max-width: 50%;
+      &>.landing-header {
+
+      }
+      &>.landing-text {
+        margin-top: 16px;
+        margin-bottom: 40px;
+      }
+      &>.landing-button {
+
+      }
+    }
+    &-note {
+      position: absolute;
+      top: calc(100% + 32px);
+      left: 0;
+    }
+  }
+  &-main {
+
+  }
+  &-section {
+    &-header {
+
+    }
+    &-text {
+
+    }
+  }
+
+  &-task {
+    padding: 80px 8px;
+    >* {
+      width: 100%;
+      max-width: 600px;
+    }
+    &-image {
+      max-width: 100%;
+    }
+    .landing-text {
+      margin-top: 16px;
+      margin-bottom: 40px;
+    }
+  }
+  &-solution {
+    padding: 80px 8px;
+    .landing-text {
+      margin-top: 16px;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 800px;
+    }
+    &-card {
+      background: #2A2A2A;
+      box-shadow: 0px 3.27003px 4.90504px rgba(0, 0, 0, 0.47);
+      border-radius: 24px;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 14px;
+      &-container {
+        max-width: 744px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+      &-title {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 16px;
+        margin: 0 8px;
+        text-align: center;
+      }
+      &-svg {
+        width: 100%;
+        height: 140px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  &-voice {
+    padding: 80px 8px;
+    .landing-header {
+      margin-bottom: 20px;
+    }
+    &-commands-container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 800px;
+      margin-bottom: 32px;
+    }
+    &-command {
+      display: flex;
+      width: 280px;
+      margin: 1px 32px 1px 0;
+      &:nth-of-type(2n) {
+        margin-right: 0;
+      }
+      &-number {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 98px;
+        line-height: 118px;
+        margin-right: 10px;
+        width: 60px;
+        text-align: center;
+      }
+      &-name {
+        font-weight: bold;
+      }
+      &-text {
+        display: flex;
+        align-items: center;
+      }
+    }
+    & .landing-text {
+      max-width: 800px;
+      &:nth-of-type(4) {
+        margin: 32px 0 16px;
+      }
+    }
+  }
+
+  &-gesture {
+    margin: 2px;
+    &-svg {
+      height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &-text {
+      text-align: center;
+    }
+  }
+
+  &-gestures {
+    .landing-header {
+      margin-bottom: 20px;
+    }
+    .landing-text {
+      margin-bottom: 32px;
+      max-width: 650px;
+    }
+    &-container {
+      display: flex;
+      justify-content: space-evenly;
+      max-width: 800px;
+      margin: 0 auto 80px;
+      flex-wrap: wrap;
+    }
+  }
+
+  &-contacts {
+    padding: 80px 8px;
+    .landing-header {
+      margin-bottom: 20px;
+    }
+    &-container {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+  }
+
+  &-contact {
+    &-role {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    &-full-name {
+      margin-bottom: 4px;
+    }
+    &-email {
+      text-decoration: none;
+      color: #ffffff;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .landing {
+    &-about {
+      flex-direction: column;
+      align-items: center;
+      padding-top: 24px;
+      &-description {
+        margin-bottom: 40px;
+        max-width: 100%;
+      }
+      .square {
+        max-width: 600px;
+        width: 100%;
+      }
+    }
+    &-task {
+
+    }
+    &-solution {
+
+    }
+  }
+}
+@media (max-width: 768px) {
+  .landing {
+    &-voice {
+      &-command {
+        width: 90%;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.rotate-left {
+  >svg {
+    animation-name: spin-left;
+    animation-duration: 1.1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+}
+.rotate-right {
+  >svg {
+    animation-name: spin-right;
+    animation-duration: 1.1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+}
+
+@-ms-keyframes spin-left {
+  from {
+    -ms-transform: rotate(0deg);
+  } to {
+      -ms-transform: rotate(45deg);
+    }
+}
+@-moz-keyframes spin-left {
+  from {
+    -moz-transform: rotate(0deg);
+  } to {
+      -moz-transform: rotate(45deg);
+    }
+}
+@-webkit-keyframes spin-left {
+  from {
+    -webkit-transform: rotate(0deg);
+  } to {
+      -webkit-transform: rotate(45deg);
+    }
+}
+@keyframes spin-left {
+  from {
+    transform: rotate(0deg);
+  } to {
+      transform: rotate(45deg);
+    }
+}
+
+@-ms-keyframes spin-right {
+  from {
+    -ms-transform: rotate(0deg);
+  } to {
+      -ms-transform: rotate(-45deg);
+    }
+}
+@-moz-keyframes spin-right {
+  from {
+    -moz-transform: rotate(0deg);
+  } to {
+      -moz-transform: rotate(-45deg);
+    }
+}
+@-webkit-keyframes spin-right {
+  from {
+    -webkit-transform: rotate(0deg);
+  } to {
+      -webkit-transform: rotate(-45deg);
+    }
+}
+@keyframes spin-right {
+  from {
+    transform: rotate(0deg);
+  } to {
+      transform: rotate(-45deg);
+    }
+}

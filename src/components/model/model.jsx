@@ -104,14 +104,14 @@ export default function Model({color, dispatch, actionsState, lang}) {
             const newConfiguratorActionsState = {};
             Object.keys(carActions).forEach(actionName => {
                 newConfiguratorActionsState[actionName] = {
-                    label: defineAnimationActionLabel(actionName, lang),
+                    label: defineAnimationActionLabel(actionName),
                     order: defineAnimationActionOrder(actionName),
                     repetitions: 0
                 }
             })
             dispatch(saveConfiguratorActionsState(newConfiguratorActionsState))
         }
-    }, [carActions, lang])
+    }, [carActions])
 
     useEffect(() => {
         Object.keys(actionsState).forEach(action => {
