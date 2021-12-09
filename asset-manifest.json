@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/volvo/static/css/main.a6d4d886.chunk.css",
-    "main.js": "/volvo/static/js/main.e7e31844.chunk.js",
-    "main.js.map": "/volvo/static/js/main.e7e31844.chunk.js.map",
+    "main.js": "/volvo/static/js/main.fc128eca.chunk.js",
+    "main.js.map": "/volvo/static/js/main.fc128eca.chunk.js.map",
     "runtime-main.js": "/volvo/static/js/runtime-main.a00e05fe.js",
     "runtime-main.js.map": "/volvo/static/js/runtime-main.a00e05fe.js.map",
     "static/css/2.65aefc5a.chunk.css": "/volvo/static/css/2.65aefc5a.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.65aefc5a.chunk.css",
     "static/js/2.45fce4c3.chunk.js",
     "static/css/main.a6d4d886.chunk.css",
-    "static/js/main.e7e31844.chunk.js"
+    "static/js/main.fc128eca.chunk.js"
   ]
 }
