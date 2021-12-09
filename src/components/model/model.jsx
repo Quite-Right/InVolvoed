@@ -3,7 +3,6 @@ import {useAnimations, useGLTF} from '@react-three/drei'
 import {useLoader} from "@react-three/fiber";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import * as THREE from 'three';
-import {useDispatch} from "react-redux";
 import {AnimationActionCreator, defineAnimationActionOrder} from "../../utils";
 import {saveConfiguratorActionsState} from "../../redux/actions/configurator-actions";
 import {defineAnimationActionLabel} from "../../utils/define-animation-action-label";

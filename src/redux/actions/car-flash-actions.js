@@ -29,7 +29,7 @@ export const flash = (onSuccess, onError) => async (dispatch, getStore) => {
         dispatch(unsetFlashErrorActionCreator());
     }
     try {
-        const asyncData = await new Promise((resolve, reject) => {
+       await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);

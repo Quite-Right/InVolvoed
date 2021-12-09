@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import "./styles.scss";
 import cn from "classnames";
 import {useDispatch, useSelector} from "react-redux";
@@ -10,9 +10,7 @@ import {SketchPicker} from "react-color";
 export const ChangeColorButton = () => {
     const dispatch = useDispatch();
     const color = useSelector(carColorSelector)
-    console.log(color)
     const onChangeComplete = (newColor) => {
-        console.log(newColor);
         dispatch(changeCarColor({
             r: newColor.rgb.r / 255,
             g: newColor.rgb.g / 255,

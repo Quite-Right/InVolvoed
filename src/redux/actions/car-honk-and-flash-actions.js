@@ -29,7 +29,7 @@ export const honkAndFlash = (onSuccess, onError) => async (dispatch, getStore) =
         dispatch(unsetHonkErrorActionCreator());
     }
     try {
-        const asyncData = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);

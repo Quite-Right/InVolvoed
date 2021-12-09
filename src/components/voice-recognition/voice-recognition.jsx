@@ -12,7 +12,7 @@ import {
 import {defineDayTimeAppeal} from "../../utils/defineDayTime";
 import './styles.scss';
 import {useDispatch, useSelector} from "react-redux";
-import {lanuageCodeSelector, lockSelector} from "../../redux/selectors";
+import {lanuageCodeSelector} from "../../redux/selectors";
 import {getDictionaryValue} from "../../utils/getDictionaryValue";
 import {engineOff, engineOn, lockCar, unlockCar} from "../../redux/actions";
 
@@ -22,8 +22,6 @@ export const VoiceRecognition = () => {
     const [micActive, setMicActive] = useState(false);
     const synth = window.speechSynthesis;
     const dispatch = useDispatch();
-    const lockState = useSelector(lockSelector);
-    const {isLocked, inProcess: disabled} = lockState;
 
 
     const toggleRecognition = () => {

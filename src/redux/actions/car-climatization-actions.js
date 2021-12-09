@@ -35,7 +35,7 @@ export const unsetClimatizationErrorActionCreator = () => ({
 
 export const climatizationOff = (onSuccess, onError) => async (dispatch) => {
     try {
-        const asyncData = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);
@@ -56,7 +56,7 @@ export const climatizationOff = (onSuccess, onError) => async (dispatch) => {
 
 export const climatizationOn = (onSuccess, onError) => async (dispatch) => {
     try {
-        const asyncData = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);

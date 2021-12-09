@@ -35,7 +35,7 @@ export const unsetLockCarErrorActionCreator = () => ({
 
 export const unlockCar = (onSuccess, onError) => async (dispatch) => {
     try {
-        const asyncData = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);
@@ -56,7 +56,7 @@ export const unlockCar = (onSuccess, onError) => async (dispatch) => {
 
 export const lockCar = (onSuccess, onError) => async (dispatch) => {
     try {
-        const asyncData = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);

@@ -35,7 +35,7 @@ export const unsetEngineErrorActionCreator = () => ({
 
 export const engineOff = (onSuccess, onError) => async (dispatch) => {
     try {
-        const asyncData = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);
@@ -56,7 +56,7 @@ export const engineOff = (onSuccess, onError) => async (dispatch) => {
 
 export const engineOn = (onSuccess, onError) => async (dispatch) => {
     try {
-        const asyncData = await new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve();
             }, 1000);
