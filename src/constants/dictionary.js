@@ -183,16 +183,16 @@ export const dictionary = {
             },
             text: {
                 title: {
-                    EN: 'On October 22-24, 2021, the hackathon <a href="https://vcr-challenge.com/"> VOLVO CARS DIGITAL CHALLENGE</a> was held.',
-                    RU: '22 - 24 октября 2021 года проходил хакатон <a href="https://vcr-challenge.ru/">VOLVO CARS DIGITAL CHALLENGE</a>.',
+                    EN: 'On October 22-24, 2021, the hackathon <a href="https://vcr-challenge.com/"> VOLVO CARS DIGITAL CHALLENGE</a> was held',
+                    RU: '22 - 24 октября 2021 года проходил хакатон <a href="https://vcr-challenge.ru/">VOLVO CARS DIGITAL CHALLENGE</a>',
                 },
                 description: {
-                    EN: 'For technical reasons, we were unable to take part in the hackathon, but our team, InVolved, solved the proposed problem. We have developed a web application for remote access to the functionality offered in <a href="https://developer.volvocars.com/volvo-api/"> API </a> functionality*.',
-                    RU: 'По техническим причинам мы не смогли приняять участие в хакатоне, но наша команда, InVolved, решила предложенную задачу. Мы разработали вэб-приложение для удаленного доступа к предложенному в <a href="https://developer.volvocars.com/volvo-api/">API</a> функционалу*.',
+                    EN: 'For technical reasons, we were unable to take part in the hackathon, but our team, InVolved, solved the proposed problem. We have developed a web application for remote access to the functionality offered in <a href="https://developer.volvocars.com/volvo-api/"> API </a> functionality*',
+                    RU: 'По техническим причинам мы не смогли принять участие в хакатоне, но наша команда, InVolved, решила предложенную задачу. Мы разработали веб-приложение для удаленного доступа к предложенному в <a href="https://developer.volvocars.com/volvo-api/">API</a> функционалу*',
                 },
                 note: {
-                    EN: '*To demonstrate the work, an abstract model of a car was used - any coincidences are accidental.',
-                    RU: '*Для демонстрации работы использовалась абстрактная модель автомобиля - любые совпадения случайны.',
+                    EN: '*To demonstrate the work, an abstract model of a car was used — any coincidences are accidental',
+                    RU: '*Для демонстрации работы использовалась абстрактная модель автомобиля — любые совпадения случайны',
                 },
             },
         },
@@ -207,7 +207,7 @@ export const dictionary = {
                     RU: 'Задача',
                 },
                 description: {
-                    EN: 'Developing innovative consumer engagement services using tools at the <a href="https://developer.volvocars.com/"> portal </a>: 3D, API, Android Automotive.',
+                    EN: 'Developing innovative consumer engagement services using tools at the <a href="https://developer.volvocars.com/"> portal </a>: 3D, API, Android Automotive',
                     RU: 'Разработка инновационных сервисов для вовлечения клиентов (consumer engagement) с помощью инструментов на <a href="https://developer.volvocars.com/">портале</a>: 3D, API, Android Automotive.',
                 },
             }
@@ -263,11 +263,11 @@ export const dictionary = {
                 description: [
                     {
                         EN: 'Our application implements the "Voice Assistant" functionality',
-                        RU: 'В нашем приложении реализована функционал "Голосовой помощник"',
+                        RU: 'В нашем приложении реализована функционал «Голосовой помощник»',
                     },
                     {
                         EN: 'In order to start using this functionality, it is enough just to say: "Hola"',
-                        RU: 'Для того чтобы начать пользоваться данным функционалом, достаточчно просто сказать: "Хола"',
+                        RU: 'Для того чтобы начать пользоваться данным функционалом, достаточчно просто сказать: «Хола»',
                     },
                     {
                         EN: 'Commands supported by work assistant:',
