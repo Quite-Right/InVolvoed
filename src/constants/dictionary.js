@@ -208,7 +208,7 @@ export const dictionary = {
                 },
                 description: {
                     EN: 'Developing innovative consumer engagement services using tools at the <a href="https://developer.volvocars.com/"> portal </a>: 3D, API, Android Automotive',
-                    RU: 'Разработка инновационных сервисов для вовлечения клиентов (consumer engagement) с помощью инструментов на <a href="https://developer.volvocars.com/">портале</a>: 3D, API, Android Automotive.',
+                    RU: 'Разработка инновационных сервисов для вовлечения клиентов (consumer engagement) с помощью инструментов на <a href="https://developer.volvocars.com/">портале</a>: 3D, API, Android Automotive',
                 },
             }
         },
@@ -223,8 +223,8 @@ export const dictionary = {
                     RU: 'Решение',
                 },
                 description: {
-                    EN: 'Our solution is a user-friendly interface that allows you to use some of the machine\'s functions and receive information about it remotely.\nThe main functions of our solution:',
-                    RU: 'Наше решение представляет собой удобный интерфейс, позволяющий пользоваться некоторыми функциями машины  и получать информацию о ней удаленно.\nОсновные функции нашего решения:',
+                    EN: 'Our solution is a user-friendly interface that allows you to use some of the machine\'s functions and receive information about it remotely\nThe main functions of our solution:',
+                    RU: 'Наше решение представляет собой удобный интерфейс, позволяющий пользоваться некоторыми функциями машины  и получать информацию о ней удаленно\nОсновные функции нашего решения:',
                 },
             },
             functions: [
@@ -241,11 +241,11 @@ export const dictionary = {
                     RU: 'включение и выключение двигателя',
                 },
                 {
-                    EN: 'turning climate control on and off',
+                    EN: 'turning climate control on and off',
                     RU: 'включение и выключение климатконтроля',
                 },
                 {
-                    EN: 'beep',
+                    EN: 'honk',
                     RU: 'подать звуковой сигнал',
                 },
                 {
@@ -332,8 +332,8 @@ export const dictionary = {
                         RU: 'Чао',
                     },
                     text: {
-                        EN: 'as all polite people do, we say goodbye to the assistant with the help of a command :)',
-                        RU: 'как все вежливые люди, мы прощаемся с помощником при помощи команды :)',
+                        EN: 'end of work with voice assistant',
+                        RU: 'окончание работоты с голосовым ассистентом',
                     },
                 },
             ]

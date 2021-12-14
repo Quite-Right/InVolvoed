@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./styles.scss";
 import cn from "classnames";
 import {useSelector, useDispatch} from "react-redux";
@@ -7,6 +7,9 @@ import {dictionary} from "../../constants";
 import {getDictionaryValue} from "../../utils/getDictionaryValue";
 import BackgroundFigure from "../backgroud-figure/background-figure";
 import {setLanuageActionCreator} from "../../redux/actions";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
+
 
 export default function LandingPage({isOpened, close}) {
     const lang = useSelector(lanuageCodeSelector);
@@ -58,17 +61,17 @@ export default function LandingPage({isOpened, close}) {
             </defs>
         </svg>,
         <svg width="93" height="74" viewBox="0 0 93 74" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_28_56)">
+            <g clip-path="url(#clip0_28_56)">
                 <g filter="url(#filter0_d_28_56)">
-                    <path d="M30.7956 19.0184C20.6517 19.0184 12.4293 27.2407 12.4293 37.3847C12.4293 47.5286 20.6517 55.751 30.7956 55.751L65.2324 55.751C75.3764 55.751 83.5987 47.5286 83.5987 37.3847C83.5987 27.2407 75.3764 19.0184 65.2324 19.0184L30.7956 19.0184Z" stroke="#00C4F0" strokeWidth="2.29579" strokeMiterlimit="10" shapeRendering="crispEdges"/>
+                    <path d="M30.7956 19.0184C20.6517 19.0184 12.4293 27.2407 12.4293 37.3847C12.4293 47.5286 20.6517 55.751 30.7956 55.751L65.2324 55.751C75.3764 55.751 83.5987 47.5286 83.5987 37.3847C83.5987 27.2407 75.3764 19.0184 65.2324 19.0184L30.7956 19.0184Z" stroke="#00C4F0" stroke-width="2.29579" stroke-miterlimit="10" shape-rendering="crispEdges"/>
                 </g>
                 <g filter="url(#filter1_d_28_56)">
-                    <path d="M44.5703 37.3847C44.5703 29.7771 38.4032 23.61 30.7956 23.61C23.188 23.61 17.0209 29.7771 17.0209 37.3847C17.0209 44.9923 23.188 51.1594 30.7956 51.1594C38.4032 51.1594 44.5703 44.9923 44.5703 37.3847Z" stroke="#00C4F0" strokeWidth="2.29579" strokeMiterlimit="10" shapeRendering="crispEdges"/>
+                    <path d="M44.5703 37.3847C44.5703 29.7771 38.4032 23.61 30.7956 23.61C23.188 23.61 17.0209 29.7771 17.0209 37.3847C17.0209 44.9923 23.188 51.1594 30.7956 51.1594C38.4032 51.1594 44.5703 44.9923 44.5703 37.3847Z" stroke="#00C4F0" stroke-width="2.29579" stroke-miterlimit="10" shape-rendering="crispEdges"/>
                 </g>
             </g>
             <defs>
-                <filter id="filter0_d_28_56" x="0.281403" y="10.8705" width="95.4652" height="61.0284" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                <filter id="filter0_d_28_56" x="0.281403" y="10.8705" width="95.4652" height="61.0284" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                     <feOffset dy="4"/>
                     <feGaussianBlur stdDeviation="5.5"/>
@@ -77,8 +80,8 @@ export default function LandingPage({isOpened, close}) {
                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_28_56"/>
                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_28_56" result="shape"/>
                 </filter>
-                <filter id="filter1_d_28_56" x="4.87299" y="15.462" width="51.8452" height="51.8453" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                <filter id="filter1_d_28_56" x="4.87299" y="15.462" width="51.8452" height="51.8453" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                     <feOffset dy="4"/>
                     <feGaussianBlur stdDeviation="5.5"/>
@@ -174,7 +177,7 @@ export default function LandingPage({isOpened, close}) {
 
     const gestures = [
         {
-            animationClassName: null,
+            animationClassName: 'stop-hand',
             svg:  <svg width="172" height="188" viewBox="0 0 172 188" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_f_30_46)">
                     <path d="M117.82 40.5427C121.13 42.5286 118.923 46.721 117.82 50.2516L106.787 87.7633L118.261 70.5521L123.777 50.4725C124.881 46.7212 123.557 42.7494 120.247 40.7635C118.923 39.6601 117.379 39.219 115.613 39.219C115.172 39.219 114.951 39.219 114.51 39.4396C115.834 39.6599 116.937 39.8807 117.82 40.5427Z" fill="#00C4F0" fillOpacity="0.64"/>
@@ -277,22 +280,29 @@ export default function LandingPage({isOpened, close}) {
             title: getDictionaryValue(`landingPage.solution.title`, lang),
             href: 'solution',
         },
-    ]
+    ];
+
+    const [navMenuOpened, setNavMenuOpened] = useState(false);
 
     return (<div className={cn(['landing-page', isOpened && 'landing-page_opened'])}>
-        <div className={'landing-button landing-language-button'} onClick={onLanguageClick}>
-            {lang}
-        </div>
-        <div className={'landing-block'}>
-            <ul className={'landing-nav'}>
-                {
-                  navMenu.map(({href, title}, index) => <li className={'landing-nav-element'}>
-                      <a href={`#${href}`} key={title}>
-                          {title}
-                      </a>
-                  </li>)
-                }
-            </ul>
+        <div className={cn(['landing-block', 'landing-page-header'])}>
+            <div className={'landing-button landing-language-button'} onClick={onLanguageClick}>
+                {lang === 'RU' ? 'ENG' : 'RU'}
+            </div>
+            <div className={'landing-nav-container'}>
+                <FontAwesomeIcon className={'landing-nav-icon'} size={'2x'} color={'#ffffff'} icon={faBars} onClick={() => {
+                    setNavMenuOpened(isOpened => !isOpened);
+                }}  />
+                <ul className={cn(['landing-nav', navMenuOpened && 'landing-nav_opened'])}>
+                    {
+                        navMenu.map(({href, title}, index) => <li className={'landing-nav-element'}>
+                            <a href={`#${href}`} key={title}>
+                                {title}
+                            </a>
+                        </li>)
+                    }
+                </ul>
+            </div>
         </div>
         <div className={'landing-block'}  id={'about-hack'}>
             <div className={'landing-about'}>
@@ -311,7 +321,7 @@ export default function LandingPage({isOpened, close}) {
                 </div>
                 <div className={'square'}>
                     <div className={'landing-about-preview'}>
-                        <video src="InVolvedPreviewVideo.mp4" width="100%" loop autoPlay muted controls/>
+                        <video src="InVolvedPreviewVideo.mp4" width="100%" loop autoPlay muted/>
                         <div className={'landing-about-note'}>
                             {getDictionaryValue(`landingPage.about-hack.text.note`, lang)}
                         </div>
