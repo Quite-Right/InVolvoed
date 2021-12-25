@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/volvo/static/css/main.6d062c72.chunk.css",
-    "main.js": "/volvo/static/js/main.26b5e909.chunk.js",
-    "main.js.map": "/volvo/static/js/main.26b5e909.chunk.js.map",
-    "runtime-main.js": "/volvo/static/js/runtime-main.5748e211.js",
-    "runtime-main.js.map": "/volvo/static/js/runtime-main.5748e211.js.map",
-    "static/css/2.65aefc5a.chunk.css": "/volvo/static/css/2.65aefc5a.chunk.css",
-    "static/js/2.38a6e6c6.chunk.js": "/volvo/static/js/2.38a6e6c6.chunk.js",
-    "static/js/2.38a6e6c6.chunk.js.map": "/volvo/static/js/2.38a6e6c6.chunk.js.map",
-    "index.html": "/volvo/index.html",
-    "static/css/2.65aefc5a.chunk.css.map": "/volvo/static/css/2.65aefc5a.chunk.css.map",
-    "static/css/main.6d062c72.chunk.css.map": "/volvo/static/css/main.6d062c72.chunk.css.map",
-    "static/js/2.38a6e6c6.chunk.js.LICENSE.txt": "/volvo/static/js/2.38a6e6c6.chunk.js.LICENSE.txt"
+    "main.css": "/InVolvoed/static/css/main.aeea9573.chunk.css",
+    "main.js": "/InVolvoed/static/js/main.9894da8a.chunk.js",
+    "main.js.map": "/InVolvoed/static/js/main.9894da8a.chunk.js.map",
+    "runtime-main.js": "/InVolvoed/static/js/runtime-main.99516bfe.js",
+    "runtime-main.js.map": "/InVolvoed/static/js/runtime-main.99516bfe.js.map",
+    "static/css/2.65aefc5a.chunk.css": "/InVolvoed/static/css/2.65aefc5a.chunk.css",
+    "static/js/2.38a6e6c6.chunk.js": "/InVolvoed/static/js/2.38a6e6c6.chunk.js",
+    "static/js/2.38a6e6c6.chunk.js.map": "/InVolvoed/static/js/2.38a6e6c6.chunk.js.map",
+    "index.html": "/InVolvoed/index.html",
+    "static/css/2.65aefc5a.chunk.css.map": "/InVolvoed/static/css/2.65aefc5a.chunk.css.map",
+    "static/css/main.aeea9573.chunk.css.map": "/InVolvoed/static/css/main.aeea9573.chunk.css.map",
+    "static/js/2.38a6e6c6.chunk.js.LICENSE.txt": "/InVolvoed/static/js/2.38a6e6c6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.5748e211.js",
+    "static/js/runtime-main.99516bfe.js",
     "static/css/2.65aefc5a.chunk.css",
     "static/js/2.38a6e6c6.chunk.js",
-    "static/css/main.6d062c72.chunk.css",
-    "static/js/main.26b5e909.chunk.js"
+    "static/css/main.aeea9573.chunk.css",
+    "static/js/main.9894da8a.chunk.js"
   ]
 }
