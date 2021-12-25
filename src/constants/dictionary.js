@@ -121,7 +121,7 @@ export const dictionary = {
             // },
 
             HonkSuccess: {
-                EN: 'Signal played successfully\n',
+                EN: 'Signal played successfully',
                 RU: 'Сигнал успешно воспроизведен',
             },
             // HonkFailure: {
@@ -130,7 +130,7 @@ export const dictionary = {
             // },
 
             FlashSuccess: {
-                EN: 'Signal played successfully\n',
+                EN: 'Signal played successfully',
                 RU: 'Сигнал успешно воспроизведен',
             },
             // LightFailure: {
@@ -187,11 +187,11 @@ export const dictionary = {
                     RU: '22 - 24 октября 2021 года проходил хакатон <a href="https://vcr-challenge.ru/">VOLVO CARS DIGITAL CHALLENGE</a>',
                 },
                 description: {
-                    EN: 'For technical reasons, we were unable to take part in the hackathon, but our team, InVolved, solved the proposed problem. We have developed a web application for remote access to the functionality offered in <a href="https://developer.volvocars.com/volvo-api/"> API </a> functionality*',
-                    RU: 'По техническим причинам мы не смогли принять участие в хакатоне, но наша команда, InVolved, решила предложенную задачу. Мы разработали веб-приложение для удаленного доступа к предложенному в <a href="https://developer.volvocars.com/volvo-api/">API</a> функционалу*',
+                    EN: 'For technical reasons, we were unable to take part in the hackathon, but our team, InVolved, solved the proposed problem. We have developed a web application for remote access to the functionality offered in <a href="https://developer.volvocars.com/volvo-api/">API</a> functionality*',
+                    RU: 'По техническим причинам мы не смогли принять участие в хакатоне, но наша команда, InVolved, решила предложенную задачу. Мы разработали веб&#8209;приложение для удаленного доступа к предложенному в <a href="https://developer.volvocars.com/volvo-api/">API</a> функционалу*',
                 },
                 note: {
-                    EN: '*To demonstrate the work, an abstract model of a car was used — any coincidences are accidental',
+                    EN: '*To demonstrate the work, an abstract model of a car was used — any coincidences are accidental',
                     RU: '*Для демонстрации работы использовалась абстрактная модель автомобиля — любые совпадения случайны',
                 },
             },
@@ -207,7 +207,7 @@ export const dictionary = {
                     RU: 'Задача',
                 },
                 description: {
-                    EN: 'Developing innovative consumer engagement services using tools at the <a href="https://developer.volvocars.com/"> portal </a>: 3D, API, Android Automotive',
+                    EN: 'Developing innovative consumer engagement services using tools at the <a href="https://developer.volvocars.com/">portal</a>: 3D, API, Android Automotive',
                     RU: 'Разработка инновационных сервисов для вовлечения клиентов (consumer engagement) с помощью инструментов на <a href="https://developer.volvocars.com/">портале</a>: 3D, API, Android Automotive',
                 },
             }
@@ -262,11 +262,11 @@ export const dictionary = {
             text: {
                 description: [
                     {
-                        EN: 'Our application implements the "Voice Assistant" functionality',
+                        EN: 'Our application implements the "Voice Assistant" functionality',
                         RU: 'В нашем приложении реализована функционал «Голосовой помощник»',
                     },
                     {
-                        EN: 'In order to start using this functionality, it is enough just to say: "Hola"',
+                        EN: 'In order to start using this functionality, it is enough just to say: "Hola"',
                         RU: 'Для того чтобы начать пользоваться данным функционалом, достаточчно просто сказать: «Хола»',
                     },
                     {
@@ -344,8 +344,8 @@ export const dictionary = {
                 RU: 'Управление жестами',
             },
             text: {
-                EN: 'In addition to the voice assistant, the application provides a gesture control function:',
-                RU: 'Кроме голосового помощника в приложении представлена функция управления жестами:',
+                EN: 'In addition to the voice assistant, the application provides a gesture control function:',
+                RU: 'Кроме голосового помощника в приложении представлена функция управления жестами:',
             },
             gesturesDescriptions: [
                 {
