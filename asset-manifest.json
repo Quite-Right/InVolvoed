@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/InVolvoed/static/css/main.aeea9573.chunk.css",
-    "main.js": "/InVolvoed/static/js/main.d57cbe7b.chunk.js",
-    "main.js.map": "/InVolvoed/static/js/main.d57cbe7b.chunk.js.map",
+    "main.js": "/InVolvoed/static/js/main.95fc8aa7.chunk.js",
+    "main.js.map": "/InVolvoed/static/js/main.95fc8aa7.chunk.js.map",
     "runtime-main.js": "/InVolvoed/static/js/runtime-main.99516bfe.js",
     "runtime-main.js.map": "/InVolvoed/static/js/runtime-main.99516bfe.js.map",
     "static/css/2.65aefc5a.chunk.css": "/InVolvoed/static/css/2.65aefc5a.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.65aefc5a.chunk.css",
     "static/js/2.38a6e6c6.chunk.js",
     "static/css/main.aeea9573.chunk.css",
-    "static/js/main.d57cbe7b.chunk.js"
+    "static/js/main.95fc8aa7.chunk.js"
   ]
 }
