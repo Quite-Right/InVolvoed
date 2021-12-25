@@ -187,7 +187,7 @@ export const dictionary = {
                     RU: '22 - 24 октября 2021 года проходил хакатон <a href="https://vcr-challenge.ru/">VOLVO CARS DIGITAL CHALLENGE</a>',
                 },
                 description: {
-                    EN: 'For technical reasons, we were unable to take part in the hackathon, but our team, InVolved, solved the proposed problem. We have developed a web application for remote access to the functionality offered in <a href="https://developer.volvocars.com/volvo-api/">API</a> functionality*',
+                    EN: 'Due to technical reasons, we were unable to take part in the hackathon, but our team, InVolved, solved the proposed problem. We have developed a web application for remote access to the functionality offered in <a href="https://developer.volvocars.com/volvo-api/">API</a>*',
                     RU: 'По техническим причинам мы не смогли принять участие в хакатоне, но наша команда, InVolved, решила предложенную задачу. Мы разработали веб&#8209;приложение для удаленного доступа к предложенному в <a href="https://developer.volvocars.com/volvo-api/">API</a> функционалу*',
                 },
                 note: {
