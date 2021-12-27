@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/InVolvoed/static/css/main.aeea9573.chunk.css",
+    "main.css": "/InVolvoed/static/css/main.7a2ac6e9.chunk.css",
     "main.js": "/InVolvoed/static/js/main.95fc8aa7.chunk.js",
     "main.js.map": "/InVolvoed/static/js/main.95fc8aa7.chunk.js.map",
     "runtime-main.js": "/InVolvoed/static/js/runtime-main.99516bfe.js",
@@ -10,14 +10,14 @@
     "static/js/2.38a6e6c6.chunk.js.map": "/InVolvoed/static/js/2.38a6e6c6.chunk.js.map",
     "index.html": "/InVolvoed/index.html",
     "static/css/2.65aefc5a.chunk.css.map": "/InVolvoed/static/css/2.65aefc5a.chunk.css.map",
-    "static/css/main.aeea9573.chunk.css.map": "/InVolvoed/static/css/main.aeea9573.chunk.css.map",
+    "static/css/main.7a2ac6e9.chunk.css.map": "/InVolvoed/static/css/main.7a2ac6e9.chunk.css.map",
     "static/js/2.38a6e6c6.chunk.js.LICENSE.txt": "/InVolvoed/static/js/2.38a6e6c6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.99516bfe.js",
     "static/css/2.65aefc5a.chunk.css",
     "static/js/2.38a6e6c6.chunk.js",
-    "static/css/main.aeea9573.chunk.css",
+    "static/css/main.7a2ac6e9.chunk.css",
     "static/js/main.95fc8aa7.chunk.js"
   ]
 }
